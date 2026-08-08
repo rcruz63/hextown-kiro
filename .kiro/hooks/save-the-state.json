@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "Save the State",
+      "trigger": "Stop",
+      "action": {
+        "type": "agent",
+        "prompt": "Crea una nueva rama en el repo si es necesario, añade los cambios realizados, realiza un commit con el mensaje conveniente y realiza un push al repo de Github. Asegurate que el usuario es rcruz63 antes de hacer push."
+      },
+      "description": "Salvar en el repo los pasos dados",
+      "enabled": true
+    }
+  ]
+}
