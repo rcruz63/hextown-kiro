@@ -6,8 +6,8 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
 
 ## Tareas
 
-- [ ] 1. Inicialización del proyecto y tipos fundamentales
-  - [ ] 1.1 Crear estructura del proyecto con Vite + TypeScript
+- [x] 1. Inicialización del proyecto y tipos fundamentales
+  - [x] 1.1 Crear estructura del proyecto con Vite + TypeScript
     - Inicializar proyecto con `npm create vite@latest` usando template TypeScript
     - Configurar `tsconfig.json` con strict mode
     - Instalar dependencias: `vitest`, `fast-check`, `@vitest/coverage-v8`, `js-yaml`, `@types/js-yaml`
@@ -15,18 +15,18 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
     - Configurar `vitest.config.ts`
     - _Requisitos: 20.1, 20.7_
 
-  - [ ] 1.2 Definir tipos de coordenadas hexagonales y funciones de hex math
+  - [x] 1.2 Definir tipos de coordenadas hexagonales y funciones de hex math
     - Implementar `AxialCoord`, `DIRECTIONS`, `hexDistance`, `hexNeighbors`, `hexRing`, `hexSpiral`, `hexToPixel`
     - Crear `src/core/hex-math.ts`
     - _Requisitos: 1.1, 2.9_
 
-  - [ ] 1.3 Implementar RNG determinista (Mulberry32 o xoshiro128**)
+  - [x] 1.3 Implementar RNG determinista (Mulberry32 o xoshiro128**)
     - Crear `src/core/rng.ts` con interfaz `Rng` y tipo `RngState`
     - Métodos: `next()`, `nextInt(max)`, `getState()`, `setState(s)`
     - Derivación de subsemillas determinista
     - _Requisitos: 1.12, 5.19_
 
-  - [ ] 1.4 Definir tipos de estado del juego y modelos de datos
+  - [x] 1.4 Definir tipos de estado del juego y modelos de datos
     - Crear `src/core/types.ts` con todas las interfaces: `GameState`, `HexCell`, `HexMap`, `Resources`, `Construction`, `MapElement`, `ThreatElement`, `ScheduledAction`, `TechState`, `GlobalEffect`, `PuzzleState`, `RespawnTracker`, etc.
     - Crear `src/core/result.ts` con tipo `Result<T, E>`
     - _Requisitos: 4.1, 4.18, 5.1_

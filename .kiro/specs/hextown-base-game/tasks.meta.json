@@ -1,0 +1,60 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1.1 Crear estructura del proyecto con Vite + TypeScript": [
+      {
+        "executionId": "785e9d2b-40fe-40e5-84a1-add47fd94571",
+        "chatSessionId": "sess_ffd3cd30-4148-4812-bc74-7177e636cbf7",
+        "timestamp": 1786353289821
+      },
+      {
+        "executionId": "785e9d2b-40fe-40e5-84a1-add47fd94571",
+        "chatSessionId": "sess_ffd3cd30-4148-4812-bc74-7177e636cbf7",
+        "timestamp": 1786357835728
+      }
+    ],
+    "1.2 Definir tipos de coordenadas hexagonales y funciones de hex math": [
+      {
+        "executionId": "785e9d2b-40fe-40e5-84a1-add47fd94571",
+        "chatSessionId": "sess_ffd3cd30-4148-4812-bc74-7177e636cbf7",
+        "timestamp": 1786357839621
+      },
+      {
+        "executionId": "785e9d2b-40fe-40e5-84a1-add47fd94571",
+        "chatSessionId": "sess_ffd3cd30-4148-4812-bc74-7177e636cbf7",
+        "timestamp": 1786360643256
+      }
+    ],
+    "1.3 Implementar RNG determinista (Mulberry32 o xoshiro128**)": [
+      {
+        "executionId": "785e9d2b-40fe-40e5-84a1-add47fd94571",
+        "chatSessionId": "sess_ffd3cd30-4148-4812-bc74-7177e636cbf7",
+        "timestamp": 1786357850302
+      },
+      {
+        "executionId": "785e9d2b-40fe-40e5-84a1-add47fd94571",
+        "chatSessionId": "sess_ffd3cd30-4148-4812-bc74-7177e636cbf7",
+        "timestamp": 1786360646570
+      }
+    ],
+    "1.4 Definir tipos de estado del juego y modelos de datos": [
+      {
+        "executionId": "785e9d2b-40fe-40e5-84a1-add47fd94571",
+        "chatSessionId": "sess_ffd3cd30-4148-4812-bc74-7177e636cbf7",
+        "timestamp": 1786357853710
+      },
+      {
+        "executionId": "785e9d2b-40fe-40e5-84a1-add47fd94571",
+        "chatSessionId": "sess_ffd3cd30-4148-4812-bc74-7177e636cbf7",
+        "timestamp": 1786360649929
+      }
+    ],
+    "1. Inicialización del proyecto y tipos fundamentales": [
+      {
+        "executionId": "785e9d2b-40fe-40e5-84a1-add47fd94571",
+        "chatSessionId": "sess_ffd3cd30-4148-4812-bc74-7177e636cbf7",
+        "timestamp": 1786360649989
+      }
+    ]
+  }
+}
