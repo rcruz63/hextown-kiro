@@ -31,7 +31,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
     - Crear `src/core/result.ts` con tipo `Result<T, E>`
     - _Requisitos: 4.1, 4.18, 5.1_
 
-  - [ ]* 1.5 Escribir tests de propiedades para hex math y RNG
+  - [x] 1.5 Escribir tests de propiedades para hex math y RNG
     - **Propiedad 1: Determinismo del RNG** — dos ejecuciones con misma semilla producen misma secuencia
     - **Propiedad 10 (parcial): Determinismo de simulación** — base de RNG determinista
     - **Valida: Requisitos 1.12, 5.19**
