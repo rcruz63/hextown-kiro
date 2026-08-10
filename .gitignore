@@ -1,0 +1,22 @@
+node_modules/
+dist/
+dist-ssr/
+coverage/
+*.local
+.DS_Store
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editores
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

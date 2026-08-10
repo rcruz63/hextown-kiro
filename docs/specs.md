@@ -40,7 +40,7 @@ La civilización arranca en modo agrícola y de subsistencia: solo sabe levantar
 - Hexágonos con la punta arriba (pointy-top).
 - Generación procedural con semilla, para poder compartir y reproducir mapas.
 - Tamaño por defecto: radio 8, unos 217 hexágonos. Configurable por escenario en YAML.
-- El océano se genera en masas contiguas, no en casillas sueltas.
+- El océano se reparte por pesos como cualquier otro terreno. Agruparlo en masas contiguas es una preferencia estética, no una restricción que se compruebe.
 
 ### Control de la generación
 
@@ -64,6 +64,8 @@ Restricciones previstas:
 | desierto | No | Sí, con penalización de producción | Terreno hostil. Leones |
 | no fértil | No | Sí | Terreno rocoso: bonus de producción a minas y fábricas. Osos |
 | océano | No | No | Solo construcciones navales. Peces, ballenas y piratas |
+
+Nota: la Ciudad nunca se sitúa en océano, porque el hexágono central recibe siempre un terreno compatible con ella.
 
 La penalización de las casas en desierto y el bonus del terreno no fértil son datos en YAML, ajustables sin tocar código.
 
@@ -258,7 +260,9 @@ Regla de balance: el sobrecoste de subir de nivel debe amortizarse en **no menos
 
 ### Demoler
 
-Se puede derribar un edificio. Cuesta 1 día, libera la casilla y **devuelve sus trabajadores a la población libre**. También se recupera **una parte de los materiales invertidos**, la mitad por defecto, ajustable en YAML. Sirve como válvula de escape: desmantelar una fábrica para reforzar un combate difícil es una jugada legítima.
+Se puede derribar cualquier edificio **excepto la Ciudad**. Cuesta 1 día, libera la casilla y **devuelve todos sus trabajadores a la población libre**, sin pérdida de gente. También se recupera **una parte de los materiales invertidos**, la mitad por defecto, ajustable en YAML. Sirve como válvula de escape: desmantelar una fábrica para reforzar un combate difícil es una jugada legítima.
+
+La Ciudad no es demolible en ningún caso: el juego no tiene sentido sin ella, y de ella dependen el coste de exploración por distancia, el nivel de las amenazas por anillo y los bonus de adyacencia de las casas. La Ciudad solo evoluciona de nivel. Tampoco puede sacrificarse para cubrir una pérdida de población: si no queda ningún otro edificio que sacrificar, la población llega a 0 y la partida se pierde.
 
 ### Modificadores de adyacencia de las casas
 
@@ -954,6 +958,7 @@ scenario:
       amenazas_maximas: 14
       distancia_minima_amenaza_humana: 4
       nivel_amenaza_por_anillo: 0.5
+      intentos_maximos: 50          # candidatos de mapa antes de abandonar
   starting_resources:
     poblacion: 5
     comida: 30
@@ -996,6 +1001,10 @@ rules:
   disease:
     probabilidad_base_diaria: 0.02
     incremento_por_poblacion: 0.001
+    poblacion_perdida: 1
+  render:
+    paleta: ["#000000", "#1d2b53", "#7e2553", "#008751", "#ab5236", "#5f574f", "#c2c3c7", "#fff1e8", "#ff004d", "#ffa300", "#ffec27", "#00e436", "#29adff", "#83769c", "#ff77a8", "#ffccaa"]
+    paleta_max_colores: 16
   exploration:
     tiempo_base: 1
     dias_por_distancia: 3
@@ -1006,14 +1015,22 @@ rules:
     dano_maximo_acumulado: 0.9
   research:
     coste_por_nivel: [20, 45, 80, 130, 200, 300]
+    devolucion_ciencia_al_cancelar: 0.5   # ciencia recuperada al cancelar una investigación
   upgrades:
-    produce_durante_mejora: true        # valor por defecto de todas las construcciones
+    produce_durante_mejora: true          # valor por defecto de todas las construcciones
+    devolucion_por_cancelacion: 0.5       # recursos recuperados al cancelar una mejora
   demolition:
     time: 1
     returns_employed_population: 1.0
     returns_materials_ratio: 0.5
   balance:
-    amortizacion_minima_dias: 10   # objetivo de diseño para las mejoras de nivel
+    amortizacion_minima_dias: 10          # objetivo de diseño para las mejoras de nivel
+    pesos_recurso:                        # valor relativo para comparar producciones
+      comida: 1
+      materiales: 1
+      poblacion: 3
+      ciencia: 4
+      oro: 4
 ```
 
 ## 16. Fase 2: la campaña
