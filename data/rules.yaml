@@ -1,0 +1,126 @@
+# Reglas globales de Hextown — Fase 1 (juego base)
+#
+# Todos los costes, tiempos, producciones y probabilidades del juego viven en
+# datos, nunca embebidos en el código (Requisito 20.1). Los campos opcionales
+# ausentes en otras definiciones toman su valor por defecto de este fichero
+# (Requisito 20.2).
+
+rules:
+  # Identificador de la versión de los datos de contenido. Se persiste en el
+  # guardado para rechazar partidas incompatibles (Requisito 21.3, 21.6).
+  data_version: "1.0.0"
+
+  # --- Valores por defecto de los campos opcionales (Requisito 20.2) ---
+  # El Cargador_De_Datos rellena con estos valores los campos ausentes en cada
+  # definición, por categoría de contenido.
+  defaults:
+    elements:
+      production_per_day: {}
+      actions: []
+    constructions:
+      tags: []
+      unique: false
+      demolishable: true
+      produce_durante_mejora: true
+    technologies:
+      dependencies: []
+      unlocks: {}
+    puzzles:
+      mode: "fijo"
+
+  # --- Tiempo (Requisito 5) ---
+  day:
+    fragments: 5              # subdivisiones visuales del día (5.1)
+    seconds_normal: 6         # segundos reales por día en estado play (5.3)
+    seconds_fast: 3           # segundos reales por día en avance rápido (5.4)
+    minimo_dias_accion: 1     # toda acción cuesta al menos 1 día entero (5.16, 5.17)
+
+  # --- Comida y hambruna (Requisito 4.5, 4.6) ---
+  food:
+    consumo_por_poblacion: 0.5        # 1 de comida por cada 2 de población total
+    poblacion_perdida_por_hambre: 1   # población perdida por unidad de comida faltante
+
+  # --- Enfermedades (Requisito 4.10, 4.11) ---
+  disease:
+    probabilidad_base_diaria: 0.02
+    incremento_por_poblacion: 0.001
+    poblacion_perdida: 1
+
+  # --- Exploración (Requisito 3.1, 3.2) ---
+  exploration:
+    tiempo_base: 1                # tiempo = tiempo_base + piso(D / dias_por_distancia)
+    dias_por_distancia: 3
+    poblacion_por_distancia: 1    # coste = max(1, techo(D × este valor × efectos))
+
+  # --- Combate (Requisito 13) ---
+  combat:
+    dado: 6                       # caras del dado de cada bando
+    dano_por_punto_dado: 0.1      # daño acumulado por punto de la tirada de daño
+    dano_maximo_acumulado: 0.9    # tope del Dano_Acumulado de una amenaza
+
+  # --- Investigación (Requisito 11) ---
+  research:
+    coste_por_nivel: [20, 45, 80, 130, 200, 300]   # coste orientativo en ciencia por escalón
+    tiempo_por_nivel: [3, 4, 6, 7, 9, 10]          # días orientativos por escalón
+    devolucion_ciencia_al_cancelar: 0.5            # ciencia recuperada al cancelar (11.12)
+    investigaciones_simultaneas: 1                 # (5.14, 11.11)
+
+  # --- Mejoras de nivel (Requisito 7) ---
+  upgrades:
+    produce_durante_mejora: true       # valor por defecto, sobrescribible por construcción (7.8)
+    devolucion_por_cancelacion: 0.5    # recursos recuperados al cancelar una mejora (7.11)
+
+  # --- Demolición (Requisito 8) ---
+  demolition:
+    time: 1
+    returns_employed_population: 1.0   # los trabajadores vuelven todos (8.4)
+    returns_materials_ratio: 0.5       # se recupera la mitad de los materiales (8.5)
+
+  # --- Balance y advertencias del validador ---
+  balance:
+    amortizacion_minima_dias: 10       # objetivo de diseño de las mejoras (7.14)
+    misiones_minimas: 8                # rango recomendado de misiones por escenario (15.7)
+    misiones_maximas: 10
+    pesos_recurso:                     # valor relativo para comparar producciones
+      comida: 1
+      materiales: 1
+      poblacion: 3
+      ciencia: 4
+      oro: 4
+
+  # --- Render (Requisito 19) ---
+  render:
+    paleta:
+      - "#000000"
+      - "#1d2b53"
+      - "#7e2553"
+      - "#008751"
+      - "#ab5236"
+      - "#5f574f"
+      - "#c2c3c7"
+      - "#fff1e8"
+      - "#ff004d"
+      - "#ffa300"
+      - "#ffec27"
+      - "#00e436"
+      - "#29adff"
+      - "#83769c"
+      - "#ff77a8"
+      - "#ffccaa"
+    paleta_max_colores: 16
+    tile_size: 48
+    animacion_bucle_max_segundos: 2    # duración máxima de un bucle de animación (19.5)
+    fps_minimo: 30                     # objetivo de rendimiento en radio 8 (19.9)
+    atlas_sprites: null                # ruta del atlas; null ⇒ pixel art generado (19.1, 19.2)
+
+  # --- Persistencia (Requisito 21) ---
+  persistence:
+    formato_version: 1
+    clave_autoguardado: "hextown:autosave"
+    prefijo_clave_guardado: "hextown:save:"
+    clave_ajustes: "hextown:settings"
+
+  # --- Textos e i18n (Requisito 22) ---
+  i18n:
+    idioma_por_defecto: "es"
+    idiomas: ["es"]

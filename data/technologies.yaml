@@ -1,0 +1,398 @@
+# Árbol de tecnologías (Requisito 11, 20.1)
+#
+# 5 ramas × 6 escalones = 30 tecnologías. Dentro de cada rama la progresión es
+# lineal: cada tecnología depende de la anterior. Las 5 raíces son investigables
+# desde el día 1 (Requisito 11.5). El nodo central del árbol es solo un elemento
+# visual: no se investiga y no cuesta nada (Requisito 11.3).
+#
+# Ni el número de ramas ni la profundidad están fijados en el código
+# (Requisito 11.2, 20.7).
+#
+# `cost` es el coste en ciencia del escalón, el único recurso que consume una
+# investigación (Requisito 11.6), y `research_time` su duración en días. Ambos
+# siguen las series declaradas en `rules.research.coste_por_nivel` y
+# `rules.research.tiempo_por_nivel`.
+#
+# Vocabulario de `global_effects.effect`:
+#   combate                        aditivo sobre la fuerza del jugador
+#   coste_poblacion_combate        multiplicativo sobre el coste del combate
+#   coste_poblacion_exploracion    multiplicativo sobre el coste de explorar
+#   coste_ciencia_investigacion    multiplicativo sobre el coste en ciencia
+#   tiempo_investigacion           multiplicativo sobre el tiempo de investigar
+#   tiempo_construccion            aditivo en días sobre las obras
+#   probabilidad_enfermedad        multiplicativo sobre la tirada de enfermedad
+#   consumo_comida                 multiplicativo sobre el consumo diario
+#   produccion                     modificador de producción de construcciones
+#   modificador_adyacencia         ajusta un modificador de adyacencia concreto
+
+technology_tree:
+  center_name_key: "technology.center.name"
+  center_desc_key: "technology.center.desc"
+  branches:
+    - id: "casas"
+      name_key: "technology.branch.casas.name"
+    - id: "alimentacion"
+      name_key: "technology.branch.alimentacion.name"
+    - id: "construccion"
+      name_key: "technology.branch.construccion.name"
+    - id: "ejercito"
+      name_key: "technology.branch.ejercito.name"
+    - id: "ciencia"
+      name_key: "technology.branch.ciencia.name"
+
+technologies:
+  # ============================================================ Rama Casas ==
+  - id: "casas_adobe"
+    name_key: "technology.casas_adobe.name"
+    desc_key: "technology.casas_adobe.desc"
+    branch: "casas"
+    tier: 1
+    research_time: 3
+    cost: 20
+    dependencies: []
+    unlocks:
+      constructions: ["casa:2"]
+
+  - id: "pozos_saneamiento"
+    name_key: "technology.pozos_saneamiento.name"
+    desc_key: "technology.pozos_saneamiento.desc"
+    branch: "casas"
+    tier: 2
+    research_time: 4
+    cost: 45
+    dependencies: ["casas_adobe"]
+    global_effects:
+      - effect: "probabilidad_enfermedad"
+        multiplier: 0.5
+
+  - id: "casas_piedra"
+    name_key: "technology.casas_piedra.name"
+    desc_key: "technology.casas_piedra.desc"
+    branch: "casas"
+    tier: 3
+    research_time: 6
+    cost: 80
+    dependencies: ["pozos_saneamiento"]
+    unlocks:
+      constructions: ["casa:3"]
+
+  - id: "urbanismo"
+    name_key: "technology.urbanismo.name"
+    desc_key: "technology.urbanismo.desc"
+    branch: "casas"
+    tier: 4
+    research_time: 7
+    cost: 130
+    dependencies: ["casas_piedra"]
+    global_effects:
+      - effect: "modificador_adyacencia"
+        target_construction: "casa"
+        target_modifier: "casa_adyacente"
+        value: 1
+
+  - id: "casas_senoriales"
+    name_key: "technology.casas_senoriales.name"
+    desc_key: "technology.casas_senoriales.desc"
+    branch: "casas"
+    tier: 5
+    research_time: 9
+    cost: 200
+    dependencies: ["urbanismo"]
+    unlocks:
+      constructions: ["casa:4"]
+
+  - id: "ciudadela"
+    name_key: "technology.ciudadela.name"
+    desc_key: "technology.ciudadela.desc"
+    branch: "casas"
+    tier: 6
+    research_time: 10
+    cost: 300
+    dependencies: ["casas_senoriales"]
+    unlocks:
+      constructions: ["ciudad:4"]
+
+  # ====================================================== Rama Alimentación ==
+  - id: "ganaderia"
+    name_key: "technology.ganaderia.name"
+    desc_key: "technology.ganaderia.desc"
+    branch: "alimentacion"
+    tier: 1
+    research_time: 3
+    cost: 20
+    dependencies: []
+    unlocks:
+      constructions: ["granja:1"]
+
+  - id: "regadio"
+    name_key: "technology.regadio.name"
+    desc_key: "technology.regadio.desc"
+    branch: "alimentacion"
+    tier: 2
+    research_time: 4
+    cost: 45
+    dependencies: ["ganaderia"]
+    unlocks:
+      constructions: ["plantacion:2"]
+
+  - id: "navegacion_costera"
+    name_key: "technology.navegacion_costera.name"
+    desc_key: "technology.navegacion_costera.desc"
+    branch: "alimentacion"
+    tier: 3
+    research_time: 6
+    cost: 80
+    dependencies: ["regadio"]
+    unlocks:
+      constructions: ["bote_pesca:1"]
+      actions: ["peces:recolectar", "ballenas:recolectar"]
+
+  - id: "establos"
+    name_key: "technology.establos.name"
+    desc_key: "technology.establos.desc"
+    branch: "alimentacion"
+    tier: 4
+    research_time: 7
+    cost: 130
+    dependencies: ["navegacion_costera"]
+    unlocks:
+      constructions: ["granja:2"]
+
+  - id: "conservacion_alimentos"
+    name_key: "technology.conservacion_alimentos.name"
+    desc_key: "technology.conservacion_alimentos.desc"
+    branch: "alimentacion"
+    tier: 5
+    research_time: 9
+    cost: 200
+    dependencies: ["establos"]
+    global_effects:
+      - effect: "consumo_comida"
+        multiplier: 0.8
+
+  - id: "rotacion_cultivos"
+    name_key: "technology.rotacion_cultivos.name"
+    desc_key: "technology.rotacion_cultivos.desc"
+    branch: "alimentacion"
+    tier: 6
+    research_time: 10
+    cost: 300
+    dependencies: ["conservacion_alimentos"]
+    unlocks:
+      constructions: ["plantacion:3"]
+
+  # ====================================================== Rama Construcción ==
+  - id: "mineria"
+    name_key: "technology.mineria.name"
+    desc_key: "technology.mineria.desc"
+    branch: "construccion"
+    tier: 1
+    research_time: 3
+    cost: 20
+    dependencies: []
+    unlocks:
+      constructions: ["mina:1"]
+
+  - id: "carpinteria"
+    name_key: "technology.carpinteria.name"
+    desc_key: "technology.carpinteria.desc"
+    branch: "construccion"
+    tier: 2
+    research_time: 4
+    cost: 45
+    dependencies: ["mineria"]
+    unlocks:
+      constructions: ["aserradero:1"]
+
+  - id: "metalurgia"
+    name_key: "technology.metalurgia.name"
+    desc_key: "technology.metalurgia.desc"
+    branch: "construccion"
+    tier: 3
+    research_time: 6
+    cost: 80
+    dependencies: ["carpinteria"]
+    unlocks:
+      constructions: ["fabrica_herramientas:1", "fabrica_pergaminos:1"]
+
+  - id: "galerias_profundas"
+    name_key: "technology.galerias_profundas.name"
+    desc_key: "technology.galerias_profundas.desc"
+    branch: "construccion"
+    tier: 4
+    research_time: 7
+    cost: 130
+    dependencies: ["metalurgia"]
+    unlocks:
+      constructions: ["mina:2"]
+
+  - id: "ingenieria"
+    name_key: "technology.ingenieria.name"
+    desc_key: "technology.ingenieria.desc"
+    branch: "construccion"
+    tier: 5
+    research_time: 9
+    cost: 200
+    dependencies: ["galerias_profundas"]
+    unlocks:
+      constructions:
+        - "aserradero:2"
+        - "fabrica_herramientas:2"
+        - "fabrica_pergaminos:2"
+        - "bote_pesca:2"
+
+  - id: "maquinaria"
+    name_key: "technology.maquinaria.name"
+    desc_key: "technology.maquinaria.desc"
+    branch: "construccion"
+    tier: 6
+    research_time: 10
+    cost: 300
+    dependencies: ["ingenieria"]
+    global_effects:
+      - effect: "tiempo_construccion"
+        value: -1
+
+  # ========================================================= Rama Ejército ==
+  - id: "caza"
+    name_key: "technology.caza.name"
+    desc_key: "technology.caza.desc"
+    branch: "ejercito"
+    tier: 1
+    research_time: 3
+    cost: 20
+    dependencies: []
+    global_effects:
+      - effect: "coste_poblacion_combate"
+        multiplier: 0.5
+        target_element_categories: ["animal_threat"]
+
+  - id: "armas_bronce"
+    name_key: "technology.armas_bronce.name"
+    desc_key: "technology.armas_bronce.desc"
+    branch: "ejercito"
+    tier: 2
+    research_time: 4
+    cost: 45
+    dependencies: ["caza"]
+    global_effects:
+      - effect: "combate"
+        value: 2
+
+  - id: "vigias"
+    name_key: "technology.vigias.name"
+    desc_key: "technology.vigias.desc"
+    branch: "ejercito"
+    tier: 3
+    research_time: 6
+    cost: 80
+    dependencies: ["armas_bronce"]
+    unlocks:
+      constructions: ["torre:1"]
+
+  - id: "armas_hierro"
+    name_key: "technology.armas_hierro.name"
+    desc_key: "technology.armas_hierro.desc"
+    branch: "ejercito"
+    tier: 4
+    research_time: 7
+    cost: 130
+    dependencies: ["vigias"]
+    replaces: "armas_bronce"       # desactiva el bonus del bronce (Requisito 11.9)
+    global_effects:
+      - effect: "combate"
+        value: 4
+
+  - id: "fortificaciones"
+    name_key: "technology.fortificaciones.name"
+    desc_key: "technology.fortificaciones.desc"
+    branch: "ejercito"
+    tier: 5
+    research_time: 9
+    cost: 200
+    dependencies: ["armas_hierro"]
+    unlocks:
+      constructions: ["torre:2"]
+
+  - id: "estrategia"
+    name_key: "technology.estrategia.name"
+    desc_key: "technology.estrategia.desc"
+    branch: "ejercito"
+    tier: 6
+    research_time: 10
+    cost: 300
+    dependencies: ["fortificaciones"]
+    global_effects:
+      - effect: "coste_poblacion_combate"
+        multiplier: 0.5
+
+  # ========================================================== Rama Ciencia ==
+  - id: "escritura"
+    name_key: "technology.escritura.name"
+    desc_key: "technology.escritura.desc"
+    branch: "ciencia"
+    tier: 1
+    research_time: 3
+    cost: 20
+    dependencies: []
+    unlocks:
+      constructions: ["centro_estudios:1"]
+
+  - id: "ensenanza"
+    name_key: "technology.ensenanza.name"
+    desc_key: "technology.ensenanza.desc"
+    branch: "ciencia"
+    tier: 2
+    research_time: 4
+    cost: 45
+    dependencies: ["escritura"]
+    unlocks:
+      constructions: ["centro_estudios:2"]
+
+  - id: "gremios"
+    name_key: "technology.gremios.name"
+    desc_key: "technology.gremios.desc"
+    branch: "ciencia"
+    tier: 3
+    research_time: 6
+    cost: 80
+    dependencies: ["ensenanza"]
+    unlocks:
+      constructions: ["centro_estudios:3"]
+
+  - id: "metodo_cientifico"
+    name_key: "technology.metodo_cientifico.name"
+    desc_key: "technology.metodo_cientifico.desc"
+    branch: "ciencia"
+    tier: 4
+    research_time: 7
+    cost: 130
+    dependencies: ["gremios"]
+    global_effects:
+      - effect: "produccion"
+        target_construction: "centro_estudios"
+        resource: "ciencia"
+        multiplier: 1.25
+
+  - id: "academia"
+    name_key: "technology.academia.name"
+    desc_key: "technology.academia.desc"
+    branch: "ciencia"
+    tier: 5
+    research_time: 9
+    cost: 200
+    dependencies: ["metodo_cientifico"]
+    unlocks:
+      constructions: ["centro_estudios:4"]
+
+  - id: "imprenta"
+    name_key: "technology.imprenta.name"
+    desc_key: "technology.imprenta.desc"
+    branch: "ciencia"
+    tier: 6
+    research_time: 10
+    cost: 300
+    dependencies: ["academia"]
+    global_effects:
+      - effect: "coste_ciencia_investigacion"
+        multiplier: 0.8

@@ -1,0 +1,118 @@
+# Puzzles de poblados (Requisito 16, en particular 16.15)
+#
+# El poblado es un elemento permanente: su puzzle decide si su efecto
+# permanente es positivo o negativo (Requisito 16.9, 16.11). Los efectos de un
+# poblado son siempre Efecto_Global vigentes desde el fragmento de resolución
+# hasta el fin de la partida, y se acumulan con los de las tecnologías
+# (Requisito 16.10).
+#
+# `mode: fijo` ⇒ enunciado y opciones escritos a mano; se sortean de una bolsa
+# sin reposición (Requisito 16.2).
+# `mode: generado` ⇒ enunciado, opciones y respuesta correcta se construyen con
+# la semilla de la partida (Requisito 16.3). Sirven de reserva cuando la bolsa
+# de puzzles fijos compatibles se agota (Requisito 16.4).
+
+puzzles:
+  # ------------------------------------------- Los Guardianes del Vado --
+  - id: "poblado_guardianes"
+    kind: "poblado"
+    mode: "fijo"
+    name_key: "puzzle.poblado_guardianes.name"
+    text_key: "puzzle.poblado_guardianes.text"
+    options:
+      - text_key: "puzzle.poblado_guardianes.option.1.text"
+        correct: false
+      - text_key: "puzzle.poblado_guardianes.option.2.text"
+        correct: true
+      - text_key: "puzzle.poblado_guardianes.option.3.text"
+        correct: false
+    on_success:
+      message_key: "puzzle.poblado_guardianes.success"
+      global_effects:
+        - effect: "combate"
+          value: 1
+    on_failure:
+      message_key: "puzzle.poblado_guardianes.failure"
+      global_effects:
+        - effect: "produccion"
+          value: -1
+          radius: 1
+
+  # -------------------------------------------- El Gremio de Tejedores --
+  - id: "poblado_tejedores"
+    kind: "poblado"
+    mode: "fijo"
+    name_key: "puzzle.poblado_tejedores.name"
+    text_key: "puzzle.poblado_tejedores.text"
+    options:
+      - text_key: "puzzle.poblado_tejedores.option.1.text"
+        correct: true          # 3 tejedores
+      - text_key: "puzzle.poblado_tejedores.option.2.text"
+        correct: false         # 6
+      - text_key: "puzzle.poblado_tejedores.option.3.text"
+        correct: false         # 9
+      - text_key: "puzzle.poblado_tejedores.option.4.text"
+        correct: false         # 27
+    on_success:
+      message_key: "puzzle.poblado_tejedores.success"
+      global_effects:
+        - effect: "recursos_por_dia"
+          resource: "oro"
+          value: 2
+    on_failure:
+      message_key: "puzzle.poblado_tejedores.failure"
+      global_effects:
+        - effect: "recursos_por_dia"
+          resource: "comida"
+          value: -1
+
+  # -------------------------------------------------------- El Pozo Seco --
+  - id: "poblado_pozo_seco"
+    kind: "poblado"
+    mode: "fijo"
+    name_key: "puzzle.poblado_pozo_seco.name"
+    text_key: "puzzle.poblado_pozo_seco.text"
+    options:
+      - text_key: "puzzle.poblado_pozo_seco.option.1.text"
+        correct: false
+      - text_key: "puzzle.poblado_pozo_seco.option.2.text"
+        correct: true
+      - text_key: "puzzle.poblado_pozo_seco.option.3.text"
+        correct: false
+      - text_key: "puzzle.poblado_pozo_seco.option.4.text"
+        correct: false
+    on_success:
+      message_key: "puzzle.poblado_pozo_seco.success"
+      global_effects:
+        - effect: "produccion"
+          target_construction: "plantacion"
+          resource: "comida"
+          value: 1
+          radius: 1
+    on_failure:
+      message_key: "puzzle.poblado_pozo_seco.failure"
+      global_effects:
+        - effect: "probabilidad_enfermedad"
+          multiplier: 1.5
+
+  # ------------------------------------- Poblado generado (bolsa de reserva) --
+  - id: "poblado_senderos"
+    kind: "poblado"
+    mode: "generado"
+    generator: "secuencia_numerica"
+    params:
+      terminos: 5
+      opciones: 4
+    name_key: "puzzle.poblado_senderos.name"
+    text_key: "puzzle.poblado_senderos.text"
+    option_text_key: "puzzle.poblado_senderos.option.text"
+    on_success:
+      message_key: "puzzle.poblado_senderos.success"
+      global_effects:
+        - effect: "coste_poblacion_exploracion"
+          multiplier: 0.8
+    on_failure:
+      message_key: "puzzle.poblado_senderos.failure"
+      global_effects:
+        - effect: "coste_poblacion_exploracion"
+          multiplier: 1.25

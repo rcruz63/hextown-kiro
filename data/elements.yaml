@@ -1,0 +1,294 @@
+# Elementos del mapa (Requisitos 9, 12, 20.1)
+#
+# Cada hexágono contiene como máximo un elemento. Los elementos NO producen
+# nada por sí mismos (Requisito 9.1): `production_per_day` es siempre vacío.
+# Un elemento se aprovecha de dos formas: consumiéndolo con una acción de
+# recolección, o explotándolo con la construcción que se monta sobre él
+# (declarada en constructions.yaml → `mounts_on_elements`).
+#
+# `category` usa el vocabulario de ElementCategory del diseño:
+#   mountain | forest | domestic_animal | fish | whale | settlement | mystery
+#   | animal_threat | human_threat
+#
+# El orden de declaración de este fichero es el orden en que el
+# Generador_De_Mapa coloca los elementos (Requisito 1.4). Las densidades por
+# elemento se declaran en el escenario (`scenario.map.element_density`).
+
+elements:
+  # ---------------------------------------------------------------- Montaña --
+  - id: "montana"
+    name_key: "element.montana.name"
+    desc_key: "element.montana.desc"
+    category: "mountain"
+    allowed_terrains: ["prado", "tundra", "desierto", "no_fertil"]
+    production_per_day: {}
+    harvestable: false          # no se puede recolectar (Requisito 9.11)
+    actions: []
+
+  # ----------------------------------------------------------------- Bosque --
+  - id: "bosque"
+    name_key: "element.bosque.name"
+    desc_key: "element.bosque.desc"
+    category: "forest"
+    allowed_terrains: ["prado", "tundra", "no_fertil"]
+    production_per_day: {}
+    actions:
+      - id: "talar"
+        name_key: "action.talar.name"
+        time: 1
+        cost:
+          poblacion: 1          # consumo: no vuelve
+        reward_instant:
+          materiales: 10
+        consumes_element: true
+
+  # --------------------------------------------------- Animales domésticos --
+  - id: "vaca"
+    name_key: "element.vaca.name"
+    desc_key: "element.vaca.desc"
+    category: "domestic_animal"
+    allowed_terrains: ["prado"]
+    production_per_day: {}
+    actions:
+      - id: "recolectar"
+        name_key: "action.recolectar.name"
+        time: 1
+        cost:
+          poblacion: 1
+        reward_instant:
+          comida: 15
+        reward_terrain_modifiers:
+          prado: 1.0
+        consumes_element: true
+
+  - id: "gallinas"
+    name_key: "element.gallinas.name"
+    desc_key: "element.gallinas.desc"
+    category: "domestic_animal"
+    allowed_terrains: ["prado"]
+    production_per_day: {}
+    actions:
+      - id: "recolectar"
+        name_key: "action.recolectar.name"
+        time: 1
+        cost:
+          poblacion: 1
+        reward_instant:
+          comida: 5
+        reward_terrain_modifiers:
+          prado: 1.0
+        consumes_element: true
+
+  - id: "cabras"
+    name_key: "element.cabras.name"
+    desc_key: "element.cabras.desc"
+    category: "domestic_animal"
+    allowed_terrains: ["prado", "tundra"]
+    production_per_day: {}
+    actions:
+      - id: "recolectar"
+        name_key: "action.recolectar.name"
+        time: 1
+        cost:
+          poblacion: 1
+        reward_instant:
+          comida: 10
+        reward_terrain_modifiers:
+          prado: 1.0
+          tundra: 0.6           # piso(10 × 0.6) = 6 de comida en tundra
+        consumes_element: true
+
+  - id: "cerdos"
+    name_key: "element.cerdos.name"
+    desc_key: "element.cerdos.desc"
+    category: "domestic_animal"
+    allowed_terrains: ["prado"]
+    production_per_day: {}
+    actions:
+      - id: "recolectar"
+        name_key: "action.recolectar.name"
+        time: 1
+        cost:
+          poblacion: 1
+        reward_instant:
+          comida: 12
+        reward_terrain_modifiers:
+          prado: 1.0
+        consumes_element: true
+
+  # -------------------------------------------------------- Fauna marina --
+  - id: "peces"
+    name_key: "element.peces.name"
+    desc_key: "element.peces.desc"
+    category: "fish"
+    allowed_terrains: ["oceano"]
+    production_per_day: {}
+    actions:
+      - id: "recolectar"
+        name_key: "action.recolectar.name"
+        time: 1
+        cost:
+          poblacion: 1
+        requires_tech: ["navegacion_costera"]   # Requisito 9.7
+        reward_instant:
+          comida: 8
+        reward_terrain_modifiers:
+          oceano: 1.0
+        consumes_element: true
+
+  - id: "ballenas"
+    name_key: "element.ballenas.name"
+    desc_key: "element.ballenas.desc"
+    category: "whale"
+    allowed_terrains: ["oceano"]
+    production_per_day: {}
+    actions:
+      - id: "recolectar"
+        name_key: "action.recolectar.name"
+        time: 2
+        cost:
+          poblacion: 2
+        requires_tech: ["navegacion_costera"]
+        reward_instant:
+          comida: 20
+        reward_terrain_modifiers:
+          oceano: 1.0
+        consumes_element: true
+
+  # ---------------------------------------------------- Poblado y misterio --
+  - id: "poblado"
+    name_key: "element.poblado.name"
+    desc_key: "element.poblado.desc"
+    category: "settlement"
+    allowed_terrains: ["prado", "tundra", "desierto", "no_fertil"]
+    production_per_day: {}
+    permanent: true             # nunca se elimina (Requisito 16.11)
+    blocks_construction: true   # ninguna construcción sobre el poblado
+    puzzle_kind: "poblado"      # bolsa de puzzles compatible
+    actions: []
+
+  - id: "misterio"
+    name_key: "element.misterio.name"
+    desc_key: "element.misterio.desc"
+    category: "mystery"
+    allowed_terrains: ["prado", "tundra", "desierto", "no_fertil"]
+    production_per_day: {}
+    blocks_construction: true
+    removed_on_puzzle_resolved: true   # Requisito 16.12
+    puzzle_kind: "misterio"
+    actions: []
+
+  # -------------------------------------------------- Amenazas animales --
+  - id: "lobos"
+    name_key: "element.lobos.name"
+    desc_key: "element.lobos.desc"
+    category: "animal_threat"
+    allowed_terrains: ["prado", "tundra"]
+    production_per_day: {}
+    nivel_base: 1
+    passive_effects:
+      - radius: 1
+        effect: "poblacion"
+        value: -1
+    combat:
+      coste_base_poblacion: 3
+      reward_instant:
+        materiales: 5
+    respawn:
+      dias_reaparicion: 12
+
+  - id: "jabalies"
+    name_key: "element.jabalies.name"
+    desc_key: "element.jabalies.desc"
+    category: "animal_threat"
+    allowed_terrains: ["prado"]
+    production_per_day: {}
+    nivel_base: 1
+    passive_effects:
+      - radius: 1
+        effect: "poblacion"
+        value: -1
+    combat:
+      coste_base_poblacion: 3
+      reward_instant:
+        comida: 8
+    respawn:
+      dias_reaparicion: 10
+
+  - id: "leones"
+    name_key: "element.leones.name"
+    desc_key: "element.leones.desc"
+    category: "animal_threat"
+    allowed_terrains: ["desierto"]
+    production_per_day: {}
+    nivel_base: 1
+    passive_effects:
+      - radius: 1
+        effect: "poblacion"
+        value: -1
+    combat:
+      coste_base_poblacion: 4
+      reward_instant:
+        materiales: 6
+    respawn:
+      dias_reaparicion: 14
+
+  - id: "osos"
+    name_key: "element.osos.name"
+    desc_key: "element.osos.desc"
+    category: "animal_threat"
+    allowed_terrains: ["tundra", "no_fertil"]
+    production_per_day: {}
+    nivel_base: 1
+    passive_effects:
+      - radius: 1
+        effect: "poblacion"
+        value: -2
+    combat:
+      coste_base_poblacion: 5
+      reward_instant:
+        comida: 10
+        materiales: 4
+    respawn:
+      dias_reaparicion: 15
+
+  # ---------------------------------------------------- Amenazas humanas --
+  - id: "barbaros"
+    name_key: "element.barbaros.name"
+    desc_key: "element.barbaros.desc"
+    category: "human_threat"
+    allowed_terrains: ["prado", "tundra", "desierto", "no_fertil"]
+    production_per_day: {}
+    nivel_base: 1
+    passive_effects:
+      - radius: 1
+        effect: "produccion"
+        value: -1
+    expansion:
+      dias_expansion: 10
+      dias_expansion_con_construccion: 20
+      sube_nivel_cada: 20
+    combat:
+      coste_base_poblacion: 5
+      reward_instant:
+        oro: 10
+
+  - id: "piratas"
+    name_key: "element.piratas.name"
+    desc_key: "element.piratas.desc"
+    category: "human_threat"
+    allowed_terrains: ["oceano"]
+    production_per_day: {}
+    nivel_base: 1
+    passive_effects:
+      - radius: 1
+        effect: "produccion"
+        value: -1
+    expansion:
+      dias_expansion: 12
+      dias_expansion_con_construccion: 24
+      sube_nivel_cada: 25
+    combat:
+      coste_base_poblacion: 6
+      reward_instant:
+        oro: 15

@@ -1,0 +1,34 @@
+# Terrenos del mapa (Requisito 20.1)
+#
+# El terreno es una clasificación permanente del hexágono. Los modificadores de
+# producción por terreno se declaran en cada construcción, no aquí, porque
+# dependen del edificio (constructions.yaml → terrain_modifiers).
+#
+# Los campos `name_key` y `desc_key` son claves del catálogo i18n, nunca
+# cadenas literales (Requisito 22.1, 22.3).
+
+terrains:
+  - id: "prado"
+    name_key: "terrain.prado.name"
+    desc_key: "terrain.prado.desc"
+    es_oceano: false
+
+  - id: "tundra"
+    name_key: "terrain.tundra.name"
+    desc_key: "terrain.tundra.desc"
+    es_oceano: false
+
+  - id: "desierto"
+    name_key: "terrain.desierto.name"
+    desc_key: "terrain.desierto.desc"
+    es_oceano: false
+
+  - id: "no_fertil"
+    name_key: "terrain.no_fertil.name"
+    desc_key: "terrain.no_fertil.desc"
+    es_oceano: false
+
+  - id: "oceano"
+    name_key: "terrain.oceano.name"
+    desc_key: "terrain.oceano.desc"
+    es_oceano: true

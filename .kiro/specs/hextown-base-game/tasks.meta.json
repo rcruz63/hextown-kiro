@@ -67,6 +67,73 @@
         "chatSessionId": "sess_109ef0a9-e10b-4855-8da3-e697979fc6f0",
         "timestamp": 1786363611961
       }
+    ],
+    "2.1 Implementar el Cargador de Datos YAML": [
+      {
+        "executionId": "aa310eab-e39c-4293-95e0-c9d6e43d6371",
+        "chatSessionId": "sess_68cf5ccf-561b-4124-a133-ebc2a5873c0d",
+        "timestamp": 1786435839019
+      },
+      {
+        "executionId": "aa310eab-e39c-4293-95e0-c9d6e43d6371",
+        "chatSessionId": "sess_68cf5ccf-561b-4124-a133-ebc2a5873c0d",
+        "timestamp": 1786441626505
+      }
+    ],
+    "2.4 Crear ficheros de datos YAML para el escenario inicial": [
+      {
+        "executionId": "aa310eab-e39c-4293-95e0-c9d6e43d6371",
+        "chatSessionId": "sess_68cf5ccf-561b-4124-a133-ebc2a5873c0d",
+        "timestamp": 1786435843555
+      },
+      {
+        "executionId": "aa310eab-e39c-4293-95e0-c9d6e43d6371",
+        "chatSessionId": "sess_68cf5ccf-561b-4124-a133-ebc2a5873c0d",
+        "timestamp": 1786441630010
+      }
+    ],
+    "2.2 Implementar el Validador de Datos": [
+      {
+        "executionId": "aa310eab-e39c-4293-95e0-c9d6e43d6371",
+        "chatSessionId": "sess_68cf5ccf-561b-4124-a133-ebc2a5873c0d",
+        "timestamp": 1786441634310
+      },
+      {
+        "executionId": "aa310eab-e39c-4293-95e0-c9d6e43d6371",
+        "chatSessionId": "sess_68cf5ccf-561b-4124-a133-ebc2a5873c0d",
+        "timestamp": 1786444210817
+      }
+    ],
+    "2.3 Implementar el Serializador de Datos": [
+      {
+        "executionId": "aa310eab-e39c-4293-95e0-c9d6e43d6371",
+        "chatSessionId": "sess_68cf5ccf-561b-4124-a133-ebc2a5873c0d",
+        "timestamp": 1786441637880
+      },
+      {
+        "executionId": "aa310eab-e39c-4293-95e0-c9d6e43d6371",
+        "chatSessionId": "sess_68cf5ccf-561b-4124-a133-ebc2a5873c0d",
+        "timestamp": 1786444216026
+      }
+    ],
+    "2.5 Implementar el Gestor de Textos (i18n)": [
+      {
+        "executionId": "aa310eab-e39c-4293-95e0-c9d6e43d6371",
+        "chatSessionId": "sess_68cf5ccf-561b-4124-a133-ebc2a5873c0d",
+        "timestamp": 1786441641523
+      },
+      {
+        "executionId": "aa310eab-e39c-4293-95e0-c9d6e43d6371",
+        "chatSessionId": "sess_68cf5ccf-561b-4124-a133-ebc2a5873c0d",
+        "timestamp": 1786444219610
+      }
+    ],
+    "2. Capa de datos: cargador, validador y serializador YAML": [
+      {
+        "executionId": "aa310eab-e39c-4293-95e0-c9d6e43d6371",
+        "chatSessionId": "sess_68cf5ccf-561b-4124-a133-ebc2a5873c0d",
+        "timestamp": 1786444219690
+      }
     ]
   }
 }
