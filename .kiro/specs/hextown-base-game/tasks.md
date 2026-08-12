@@ -73,7 +73,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
     - Devolver la clave como fallback si no existe en el catálogo activo
     - _Requisitos: 22.1, 22.2, 22.5, 22.6, 22.7_
 
-  - [ ]* 2.6 Escribir tests de propiedades para datos YAML e i18n
+  - [x] 2.6 Escribir tests de propiedades para datos YAML e i18n
     - **Propiedad 35: Ida y vuelta de datos YAML** — cargar → serializar → cargar produce resultado equivalente
     - **Propiedad 36: Manejo robusto de YAML inválido** — errores informativos sin excepciones
     - **Propiedad 38: Completitud de catálogos de idioma** — claves del español presentes en otros catálogos

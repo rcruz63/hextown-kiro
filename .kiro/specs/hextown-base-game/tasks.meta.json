@@ -134,6 +134,28 @@
         "chatSessionId": "sess_68cf5ccf-561b-4124-a133-ebc2a5873c0d",
         "timestamp": 1786444219690
       }
+    ],
+    "2.6 Escribir tests de propiedades para datos YAML e i18n": [
+      {
+        "executionId": "27d40c82-ca7b-4bdf-b767-e38f4731d3ab",
+        "chatSessionId": "sess_6e47317a-0858-440d-868b-a5dc7695480e",
+        "timestamp": 1786447813506
+      },
+      {
+        "executionId": "27513012-cdb8-4636-93b9-57efbbc9d77a",
+        "chatSessionId": "sess_b74c8d43-d308-4ae4-a113-cb5524d91838",
+        "timestamp": 1786449610790
+      },
+      {
+        "executionId": "adaf5113-67f2-4972-9aea-90974c11cb8a",
+        "chatSessionId": "sess_84690210-d9df-434f-b8e5-395215f2ba2d",
+        "timestamp": 1786530590500
+      },
+      {
+        "executionId": "adaf5113-67f2-4972-9aea-90974c11cb8a",
+        "chatSessionId": "sess_84690210-d9df-434f-b8e5-395215f2ba2d",
+        "timestamp": 1786538634468
+      }
     ]
   }
 }

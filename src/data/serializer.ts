@@ -236,6 +236,16 @@ function planFiles(data: GameData): FilePlan[] {
   for (const paths of catalogFiles.values()) {
     sequences.push(paths);
   }
+  // El orden de los catálogos es el orden en que se cargaron sus idiomas, y el
+  // Gestor_De_Textos lo expone como `availableLocales`: se conserva ordenando
+  // los ficheros por el primero de cada idioma. Sin esta secuencia los
+  // catálogos saldrían en orden de ruta y la recarga los reordenaría.
+  sequences.push(
+    [...catalogFiles.values()].flatMap((paths) => {
+      const first = paths[0];
+      return first === undefined ? [] : [first];
+    }),
+  );
 
   const plans: FilePlan[] = [];
   for (const path of orderFiles(sequences)) {
