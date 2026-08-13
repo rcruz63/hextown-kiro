@@ -1,0 +1,558 @@
+# Construcciones y sus niveles (Requisitos 6, 7, 8, 9, 10, 14, 20.1)
+#
+# Convenciones:
+# - `employs` es el TOTAL de trabajadores del nivel, no el incremento: al
+#   mejorar solo hay que aportar la diferencia (Requisito 7.3).
+# - `cost` se compromete al iniciar la obra. El nivel 2 cuesta materiales y del
+#   nivel 3 en adelante también oro (Requisito 7.5).
+# - `requires_tech` lista las tecnologías necesarias para ese nivel (6.3, 7.2).
+# - `terrain_modifiers` son multiplicativos sobre la producción base (6.10).
+# - `adjacency_modifiers` son aditivos y se aplican una vez por cada hexágono
+#   adyacente que cumple el objetivo (`per_adjacent: true`).
+# - `produce_durante_mejora` sobrescribe `rules.upgrades.produce_durante_mejora`
+#   cuando está declarado (Requisito 7.8).
+# - `tags: ["industria"]` marca los edificios que penalizan a las casas
+#   adyacentes (Requisito 6.11).
+
+constructions:
+  # ------------------------------------------------------------------ Casa --
+  - id: "casa"
+    name_key: "construction.casa.name"
+    desc_key: "construction.casa.desc"
+    allowed_terrains: ["prado", "tundra", "desierto", "no_fertil"]
+    tags: []
+    unique: false
+    demolishable: true
+    terrain_modifiers:
+      prado: 1.0
+      tundra: 1.0
+      desierto: 0.5           # penalización de las casas en desierto (6.11)
+      no_fertil: 1.0
+    adjacency_modifiers:
+      - id: "casa_adyacente"
+        name_key: "modifier.casa.casa_adyacente"
+        target_constructions: ["casa"]
+        effect: "poblacion"
+        value: 1
+        per_adjacent: true
+      - id: "ciudad_adyacente_poblacion"
+        name_key: "modifier.casa.ciudad_adyacente_poblacion"
+        target_constructions: ["ciudad"]
+        effect: "poblacion"
+        value: 1
+        per_adjacent: true
+      - id: "ciudad_adyacente_oro"
+        name_key: "modifier.casa.ciudad_adyacente_oro"
+        target_constructions: ["ciudad"]
+        effect: "oro"
+        value: 1
+        per_adjacent: true
+      - id: "amenaza_adyacente_poblacion"
+        name_key: "modifier.casa.amenaza_adyacente_poblacion"
+        target_element_categories: ["animal_threat", "human_threat"]
+        effect: "poblacion"
+        value: -1
+        per_adjacent: true
+      - id: "amenaza_adyacente_oro"
+        name_key: "modifier.casa.amenaza_adyacente_oro"
+        target_element_categories: ["animal_threat", "human_threat"]
+        effect: "oro"
+        value: -1
+        per_adjacent: true
+      - id: "industria_adyacente"
+        name_key: "modifier.casa.industria_adyacente"
+        target_tags: ["industria"]
+        effect: "poblacion"
+        value: -1
+        per_adjacent: true
+    levels:
+      - level: 1
+        name_key: "construction.casa.level.1.name"
+        build_time: 1
+        cost:
+          comida: 10
+        employs: 0
+        requires_tech: []
+        production_per_day:
+          poblacion: 1
+      - level: 2
+        name_key: "construction.casa.level.2.name"
+        build_time: 2
+        cost:
+          comida: 20
+          materiales: 15
+        employs: 1
+        requires_tech: ["casas_adobe"]
+        production_per_day:
+          poblacion: 2
+          oro: 1
+      - level: 3
+        name_key: "construction.casa.level.3.name"
+        build_time: 4
+        cost:
+          comida: 30
+          materiales: 40
+          oro: 20
+        employs: 2
+        requires_tech: ["casas_piedra"]
+        production_per_day:
+          poblacion: 3
+          oro: 2
+      - level: 4
+        name_key: "construction.casa.level.4.name"
+        build_time: 6
+        cost:
+          comida: 40
+          materiales: 90
+          oro: 60
+        employs: 3
+        requires_tech: ["casas_senoriales"]
+        production_per_day:
+          poblacion: 4
+          oro: 4
+
+  # ------------------------------------------------------------ Plantación --
+  - id: "plantacion"
+    name_key: "construction.plantacion.name"
+    desc_key: "construction.plantacion.desc"
+    allowed_terrains: ["prado", "tundra"]
+    tags: []
+    unique: false
+    demolishable: true
+    terrain_modifiers:
+      prado: 1.0
+      tundra: 0.5             # la tundra rinde la mitad
+    levels:
+      - level: 1
+        name_key: "construction.plantacion.level.1.name"
+        build_time: 1
+        cost:
+          materiales: 5
+        employs: 1
+        requires_tech: []
+        production_per_day:
+          comida: 2
+      - level: 2
+        name_key: "construction.plantacion.level.2.name"
+        build_time: 3
+        cost:
+          materiales: 35
+        employs: 2
+        requires_tech: ["regadio"]
+        production_per_day:
+          comida: 5
+      - level: 3
+        name_key: "construction.plantacion.level.3.name"
+        build_time: 5
+        cost:
+          materiales: 50
+          oro: 15
+        employs: 3
+        requires_tech: ["rotacion_cultivos"]
+        production_per_day:
+          comida: 9
+
+  # ----------------------------------------------------------------- Granja --
+  # Se monta sobre un animal doméstico: el animal pasa a ser la fuente de
+  # producción del edificio (Requisito 9.4). La producción se declara por
+  # elemento y el modificador por (elemento, terreno), exactamente una vez
+  # para cada par (Requisito 9.16).
+  - id: "granja"
+    name_key: "construction.granja.name"
+    desc_key: "construction.granja.desc"
+    allowed_terrains: ["prado", "tundra"]
+    tags: []
+    unique: false
+    demolishable: true
+    mounts_on_elements: ["vaca", "gallinas", "cabras", "cerdos"]
+    terrain_modifiers_per_element:
+      vaca:
+        prado: 1.0
+      gallinas:
+        prado: 1.0
+      cabras:
+        prado: 1.0
+        tundra: 0.7           # piso(3 × 0.7) = 2 de comida en tundra
+      cerdos:
+        prado: 1.0
+    levels:
+      - level: 1
+        name_key: "construction.granja.level.1.name"
+        build_time: 2
+        cost:
+          materiales: 10
+        employs: 2
+        requires_tech: ["ganaderia"]
+        production_per_element:
+          vaca:
+            comida: 3
+            materiales: 2
+          gallinas:
+            comida: 2
+          cabras:
+            comida: 3
+          cerdos:
+            comida: 2
+            materiales: 1
+      - level: 2
+        name_key: "construction.granja.level.2.name"
+        build_time: 4
+        cost:
+          materiales: 35
+          oro: 10
+        employs: 4
+        requires_tech: ["establos"]
+        production_per_element:
+          vaca:
+            comida: 5
+            materiales: 3
+          gallinas:
+            comida: 4
+          cabras:
+            comida: 5
+          cerdos:
+            comida: 4
+            materiales: 2
+
+  # ----------------------------------------------------------- Bote de pesca --
+  - id: "bote_pesca"
+    name_key: "construction.bote_pesca.name"
+    desc_key: "construction.bote_pesca.desc"
+    allowed_terrains: ["oceano"]
+    tags: []
+    unique: false
+    demolishable: true
+    mounts_on_elements: ["peces", "ballenas"]
+    terrain_modifiers_per_element:
+      peces:
+        oceano: 1.0
+      ballenas:
+        oceano: 1.0
+    levels:
+      - level: 1
+        name_key: "construction.bote_pesca.level.1.name"
+        build_time: 2
+        cost:
+          materiales: 12
+        employs: 2
+        requires_tech: ["navegacion_costera"]
+        production_per_element:
+          peces:
+            comida: 2
+          ballenas:
+            comida: 4
+      - level: 2
+        name_key: "construction.bote_pesca.level.2.name"
+        build_time: 4
+        cost:
+          materiales: 30
+          oro: 5
+        employs: 3
+        requires_tech: ["ingenieria"]
+        production_per_element:
+          peces:
+            comida: 4
+          ballenas:
+            comida: 7
+
+  # ------------------------------------------------------------------- Mina --
+  - id: "mina"
+    name_key: "construction.mina.name"
+    desc_key: "construction.mina.desc"
+    allowed_terrains: ["prado", "tundra", "desierto", "no_fertil"]
+    tags: ["industria"]
+    unique: false
+    demolishable: true
+    mounts_on_elements: ["montana"]
+    produce_durante_mejora: false   # las galerías se cierran durante la obra
+    terrain_modifiers:
+      prado: 1.0
+      tundra: 1.0
+      desierto: 1.0
+      no_fertil: 1.5          # bonus del terreno rocoso (Requisito 9.5)
+    levels:
+      - level: 1
+        name_key: "construction.mina.level.1.name"
+        build_time: 3
+        cost:
+          materiales: 20
+        employs: 3
+        requires_tech: ["mineria"]
+        production_per_day:
+          materiales: 2
+          oro: 1
+      - level: 2
+        name_key: "construction.mina.level.2.name"
+        build_time: 5
+        cost:
+          materiales: 60
+          oro: 30
+        employs: 5
+        requires_tech: ["galerias_profundas"]
+        production_per_day:
+          materiales: 4
+          oro: 2
+
+  # ------------------------------------------------------------- Aserradero --
+  # Excepción intencionada a la fórmula general: produce por bosque adyacente y
+  # sin modificadores de terreno (Requisito 9.9).
+  - id: "aserradero"
+    name_key: "construction.aserradero.name"
+    desc_key: "construction.aserradero.desc"
+    allowed_terrains: ["prado", "tundra", "desierto", "no_fertil"]
+    tags: []
+    unique: false
+    demolishable: true
+    requires_adjacent_element: "bosque"   # al menos uno (Requisito 6.5)
+    levels:
+      - level: 1
+        name_key: "construction.aserradero.level.1.name"
+        build_time: 3
+        cost:
+          materiales: 15
+        employs: 2
+        requires_tech: ["carpinteria"]
+        production_per_adjacent:
+          element: "bosque"
+          materiales: 2
+      - level: 2
+        name_key: "construction.aserradero.level.2.name"
+        build_time: 5
+        cost:
+          materiales: 45
+          oro: 20
+        employs: 4
+        requires_tech: ["ingenieria"]
+        production_per_adjacent:
+          element: "bosque"
+          materiales: 4
+
+  # ------------------------------------------- Fábrica de herramientas (oro) --
+  # Las fábricas no extraen: transforman. Si un día faltan insumos, no consumen
+  # ni producen nada ese día (Requisito 10.7).
+  - id: "fabrica_herramientas"
+    name_key: "construction.fabrica_herramientas.name"
+    desc_key: "construction.fabrica_herramientas.desc"
+    allowed_terrains: ["prado", "tundra", "desierto", "no_fertil"]
+    tags: ["industria", "fabrica"]
+    unique: false
+    demolishable: true
+    terrain_modifiers:
+      prado: 1.0
+      tundra: 1.0
+      desierto: 1.0
+      no_fertil: 1.25
+    levels:
+      - level: 1
+        name_key: "construction.fabrica_herramientas.level.1.name"
+        build_time: 4
+        cost:
+          materiales: 40
+        employs: 4
+        requires_tech: ["metalurgia"]
+        consumes_per_day:
+          materiales: 4
+        production_per_day:
+          oro: 3
+      - level: 2
+        name_key: "construction.fabrica_herramientas.level.2.name"
+        build_time: 6
+        cost:
+          materiales: 90
+          oro: 40
+        employs: 7
+        requires_tech: ["ingenieria"]
+        consumes_per_day:
+          materiales: 7
+        production_per_day:
+          oro: 6
+
+  # --------------------------------------- Fábrica de pergaminos (ciencia) --
+  - id: "fabrica_pergaminos"
+    name_key: "construction.fabrica_pergaminos.name"
+    desc_key: "construction.fabrica_pergaminos.desc"
+    allowed_terrains: ["prado", "tundra", "desierto", "no_fertil"]
+    tags: ["industria", "fabrica"]
+    unique: false
+    demolishable: true
+    terrain_modifiers:
+      prado: 1.0
+      tundra: 1.0
+      desierto: 1.0
+      no_fertil: 1.25
+    levels:
+      - level: 1
+        name_key: "construction.fabrica_pergaminos.level.1.name"
+        build_time: 4
+        cost:
+          materiales: 45
+        employs: 4
+        requires_tech: ["metalurgia"]
+        consumes_per_day:
+          materiales: 5
+        production_per_day:
+          ciencia: 2
+      - level: 2
+        name_key: "construction.fabrica_pergaminos.level.2.name"
+        build_time: 6
+        cost:
+          materiales: 95
+          oro: 45
+        employs: 7
+        requires_tech: ["ingenieria"]
+        consumes_per_day:
+          materiales: 9
+        production_per_day:
+          ciencia: 4
+
+  # ------------------------------------------------- Centro de estudios --
+  # Un solo edificio de cuatro niveles: monasterio, escuela, gremio y
+  # universidad. Es la línea de investigación de la rama Ciencia.
+  - id: "centro_estudios"
+    name_key: "construction.centro_estudios.name"
+    desc_key: "construction.centro_estudios.desc"
+    allowed_terrains: ["prado", "tundra", "desierto", "no_fertil"]
+    tags: []
+    unique: false
+    demolishable: true
+    terrain_modifiers:
+      prado: 1.0
+      tundra: 1.0
+      desierto: 1.0
+      no_fertil: 1.0
+    levels:
+      - level: 1
+        name_key: "construction.centro_estudios.level.1.name"
+        build_time: 3
+        cost:
+          materiales: 25
+        employs: 2
+        requires_tech: ["escritura"]
+        production_per_day:
+          ciencia: 2
+      - level: 2
+        name_key: "construction.centro_estudios.level.2.name"
+        build_time: 4
+        cost:
+          materiales: 50
+          oro: 20
+        employs: 4
+        requires_tech: ["ensenanza"]
+        production_per_day:
+          ciencia: 4
+      - level: 3
+        name_key: "construction.centro_estudios.level.3.name"
+        build_time: 5
+        cost:
+          materiales: 90
+          oro: 50
+        employs: 6
+        requires_tech: ["gremios"]
+        production_per_day:
+          ciencia: 7
+      - level: 4
+        name_key: "construction.centro_estudios.level.4.name"
+        build_time: 7
+        cost:
+          materiales: 150
+          oro: 120
+        employs: 9
+        requires_tech: ["academia"]
+        production_per_day:
+          ciencia: 11
+
+  # -------------------------------------------------- Torre de defensa --
+  # Infraestructura de bloqueo: no produce y no aporta fuerza de combate. Sus
+  # arqueros quedan como Poblacion_Empleada (Requisito 14.5, 14.6).
+  - id: "torre"
+    name_key: "construction.torre.name"
+    desc_key: "construction.torre.desc"
+    allowed_terrains: ["prado", "tundra", "desierto", "no_fertil"]
+    tags: []
+    unique: false
+    demolishable: true
+    levels:
+      - level: 1
+        name_key: "construction.torre.level.1.name"
+        build_time: 3
+        cost:
+          materiales: 30
+        employs: 2
+        requires_tech: ["vigias"]
+        production_per_day: {}
+        blocks_expansion_radius: 1
+      - level: 2
+        name_key: "construction.torre.level.2.name"
+        build_time: 6
+        cost:
+          materiales: 80
+          oro: 40
+        employs: 4
+        requires_tech: ["fortificaciones"]
+        production_per_day: {}
+        blocks_expansion_radius: 2
+
+  # ----------------------------------------------------------------- Ciudad --
+  # Única y no demolible (Requisito 6.16, 8.2). Los niveles 1 a 3 no exigen
+  # tecnología; el 4 exige Ciudadela (6.14). El nivel 2 no pide oro (6.15).
+  - id: "ciudad"
+    name_key: "construction.ciudad.name"
+    desc_key: "construction.ciudad.desc"
+    allowed_terrains: ["prado", "tundra", "desierto", "no_fertil"]
+    tags: []
+    unique: true
+    demolishable: false
+    sacrificable: false          # no puede sacrificarse ante una pérdida (4.8)
+    terrain_modifiers:
+      prado: 1.0
+      tundra: 1.0
+      desierto: 1.0
+      no_fertil: 1.0
+    levels:
+      - level: 1
+        name_key: "construction.ciudad.level.1.name"
+        build_time: 1
+        cost: {}
+        employs: 0
+        requires_tech: []
+        production_per_day:
+          poblacion: 1
+          materiales: 2
+      - level: 2
+        name_key: "construction.ciudad.level.2.name"
+        build_time: 3
+        cost:
+          materiales: 40
+        employs: 0
+        requires_tech: []
+        requires_population_total: 15
+        production_per_day:
+          poblacion: 2
+          materiales: 3
+          oro: 1
+      - level: 3
+        name_key: "construction.ciudad.level.3.name"
+        build_time: 5
+        cost:
+          materiales: 100
+          oro: 80
+        employs: 0
+        requires_tech: []
+        requires_population_total: 30
+        production_per_day:
+          poblacion: 3
+          materiales: 4
+          oro: 2
+      - level: 4
+        name_key: "construction.ciudad.level.4.name"
+        build_time: 8
+        cost:
+          materiales: 200
+          oro: 200
+        employs: 0
+        requires_tech: ["ciudadela"]
+        requires_population_total: 50
+        production_per_day:
+          poblacion: 5
+          materiales: 6
+          oro: 4

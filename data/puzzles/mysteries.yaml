@@ -1,0 +1,103 @@
+# Puzzles de misterios (Requisito 16, en particular 16.16)
+#
+# El misterio se resuelve una sola vez, aplica una modificación única de
+# recursos en el fragmento de resolución y desaparece del hexágono
+# (Requisito 16.9, 16.12, 16.13).
+#
+# Los efectos `instant` son cantidades de recurso. Si un efecto negativo dejaría
+# un recurso por debajo de 0, el recurso queda en 0 y el Registro_De_Eventos
+# anota la cantidad no aplicada (Requisito 16.8).
+
+puzzles:
+  # ------------------------------------- El Monolito de las Tres Cifras --
+  - id: "misterio_monolito"
+    kind: "misterio"
+    mode: "generado"
+    generator: "adivina_numero"
+    params:
+      digitos: 3
+      pistas: 3
+      opciones: 4
+    name_key: "puzzle.misterio_monolito.name"
+    text_key: "puzzle.misterio_monolito.text"
+    hint_text_key: "puzzle.misterio_monolito.hint"
+    option_text_key: "puzzle.misterio_monolito.option.text"
+    on_success:
+      message_key: "puzzle.misterio_monolito.success"
+      instant:
+        ciencia: 40
+    on_failure:
+      message_key: "puzzle.misterio_monolito.failure"
+      instant:
+        poblacion: -3
+
+  # ------------------------------------------- La Balanza del Mercader --
+  - id: "misterio_balanza"
+    kind: "misterio"
+    mode: "fijo"
+    name_key: "puzzle.misterio_balanza.name"
+    text_key: "puzzle.misterio_balanza.text"
+    options:
+      - text_key: "puzzle.misterio_balanza.option.1.text"
+        correct: false         # 1 pesada
+      - text_key: "puzzle.misterio_balanza.option.2.text"
+        correct: true          # 2 pesadas
+      - text_key: "puzzle.misterio_balanza.option.3.text"
+        correct: false         # 3 pesadas
+      - text_key: "puzzle.misterio_balanza.option.4.text"
+        correct: false         # 7 pesadas
+    on_success:
+      message_key: "puzzle.misterio_balanza.success"
+      instant:
+        oro: 50
+    on_failure:
+      message_key: "puzzle.misterio_balanza.failure"
+      instant:
+        materiales: -20
+
+  # -------------------------------- El Mapa Roto del Cartógrafo (espacial) --
+  - id: "misterio_mapa_roto"
+    kind: "misterio"
+    mode: "generado"
+    generator: "pieza_faltante_hex"
+    params:
+      opciones: 4
+      piezas: 6
+    name_key: "puzzle.misterio_mapa_roto.name"
+    text_key: "puzzle.misterio_mapa_roto.text"
+    option_text_key: "puzzle.misterio_mapa_roto.option.text"
+    on_success:
+      message_key: "puzzle.misterio_mapa_roto.success"
+      instant: {}
+      reveal:                  # Requisito 16.17
+        radius: 1
+        from_state: "hidden"
+        to_state: "dimmed"
+    on_failure:
+      message_key: "puzzle.misterio_mapa_roto.failure"
+      instant:
+        poblacion: -1
+
+  # ----------------------------------------------------- El Granero Sellado --
+  - id: "misterio_granero"
+    kind: "misterio"
+    mode: "fijo"
+    name_key: "puzzle.misterio_granero.name"
+    text_key: "puzzle.misterio_granero.text"
+    options:
+      - text_key: "puzzle.misterio_granero.option.1.text"
+        correct: false         # 36
+      - text_key: "puzzle.misterio_granero.option.2.text"
+        correct: false         # 40
+      - text_key: "puzzle.misterio_granero.option.3.text"
+        correct: true          # 42 = 6 × 7
+      - text_key: "puzzle.misterio_granero.option.4.text"
+        correct: false         # 44
+    on_success:
+      message_key: "puzzle.misterio_granero.success"
+      instant:
+        comida: 60
+    on_failure:
+      message_key: "puzzle.misterio_granero.failure"
+      instant:
+        comida: -15

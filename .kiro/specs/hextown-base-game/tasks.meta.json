@@ -55,6 +55,107 @@
         "chatSessionId": "sess_ffd3cd30-4148-4812-bc74-7177e636cbf7",
         "timestamp": 1786360649989
       }
+    ],
+    "1.5 Escribir tests de propiedades para hex math y RNG": [
+      {
+        "executionId": "c2d3bb05-431e-49a7-b9f2-679992a53a58",
+        "chatSessionId": "sess_109ef0a9-e10b-4855-8da3-e697979fc6f0",
+        "timestamp": 1786362177173
+      },
+      {
+        "executionId": "c2d3bb05-431e-49a7-b9f2-679992a53a58",
+        "chatSessionId": "sess_109ef0a9-e10b-4855-8da3-e697979fc6f0",
+        "timestamp": 1786363611961
+      }
+    ],
+    "2.1 Implementar el Cargador de Datos YAML": [
+      {
+        "executionId": "aa310eab-e39c-4293-95e0-c9d6e43d6371",
+        "chatSessionId": "sess_68cf5ccf-561b-4124-a133-ebc2a5873c0d",
+        "timestamp": 1786435839019
+      },
+      {
+        "executionId": "aa310eab-e39c-4293-95e0-c9d6e43d6371",
+        "chatSessionId": "sess_68cf5ccf-561b-4124-a133-ebc2a5873c0d",
+        "timestamp": 1786441626505
+      }
+    ],
+    "2.4 Crear ficheros de datos YAML para el escenario inicial": [
+      {
+        "executionId": "aa310eab-e39c-4293-95e0-c9d6e43d6371",
+        "chatSessionId": "sess_68cf5ccf-561b-4124-a133-ebc2a5873c0d",
+        "timestamp": 1786435843555
+      },
+      {
+        "executionId": "aa310eab-e39c-4293-95e0-c9d6e43d6371",
+        "chatSessionId": "sess_68cf5ccf-561b-4124-a133-ebc2a5873c0d",
+        "timestamp": 1786441630010
+      }
+    ],
+    "2.2 Implementar el Validador de Datos": [
+      {
+        "executionId": "aa310eab-e39c-4293-95e0-c9d6e43d6371",
+        "chatSessionId": "sess_68cf5ccf-561b-4124-a133-ebc2a5873c0d",
+        "timestamp": 1786441634310
+      },
+      {
+        "executionId": "aa310eab-e39c-4293-95e0-c9d6e43d6371",
+        "chatSessionId": "sess_68cf5ccf-561b-4124-a133-ebc2a5873c0d",
+        "timestamp": 1786444210817
+      }
+    ],
+    "2.3 Implementar el Serializador de Datos": [
+      {
+        "executionId": "aa310eab-e39c-4293-95e0-c9d6e43d6371",
+        "chatSessionId": "sess_68cf5ccf-561b-4124-a133-ebc2a5873c0d",
+        "timestamp": 1786441637880
+      },
+      {
+        "executionId": "aa310eab-e39c-4293-95e0-c9d6e43d6371",
+        "chatSessionId": "sess_68cf5ccf-561b-4124-a133-ebc2a5873c0d",
+        "timestamp": 1786444216026
+      }
+    ],
+    "2.5 Implementar el Gestor de Textos (i18n)": [
+      {
+        "executionId": "aa310eab-e39c-4293-95e0-c9d6e43d6371",
+        "chatSessionId": "sess_68cf5ccf-561b-4124-a133-ebc2a5873c0d",
+        "timestamp": 1786441641523
+      },
+      {
+        "executionId": "aa310eab-e39c-4293-95e0-c9d6e43d6371",
+        "chatSessionId": "sess_68cf5ccf-561b-4124-a133-ebc2a5873c0d",
+        "timestamp": 1786444219610
+      }
+    ],
+    "2. Capa de datos: cargador, validador y serializador YAML": [
+      {
+        "executionId": "aa310eab-e39c-4293-95e0-c9d6e43d6371",
+        "chatSessionId": "sess_68cf5ccf-561b-4124-a133-ebc2a5873c0d",
+        "timestamp": 1786444219690
+      }
+    ],
+    "2.6 Escribir tests de propiedades para datos YAML e i18n": [
+      {
+        "executionId": "27d40c82-ca7b-4bdf-b767-e38f4731d3ab",
+        "chatSessionId": "sess_6e47317a-0858-440d-868b-a5dc7695480e",
+        "timestamp": 1786447813506
+      },
+      {
+        "executionId": "27513012-cdb8-4636-93b9-57efbbc9d77a",
+        "chatSessionId": "sess_b74c8d43-d308-4ae4-a113-cb5524d91838",
+        "timestamp": 1786449610790
+      },
+      {
+        "executionId": "adaf5113-67f2-4972-9aea-90974c11cb8a",
+        "chatSessionId": "sess_84690210-d9df-434f-b8e5-395215f2ba2d",
+        "timestamp": 1786530590500
+      },
+      {
+        "executionId": "adaf5113-67f2-4972-9aea-90974c11cb8a",
+        "chatSessionId": "sess_84690210-d9df-434f-b8e5-395215f2ba2d",
+        "timestamp": 1786538634468
+      }
     ]
   }
 }

@@ -1,0 +1,483 @@
+# Catálogo de textos en español — idioma por defecto (Requisito 22)
+#
+# Todo texto visible se resuelve por clave de catálogo, incluidos los nombres y
+# descripciones declarados en los ficheros de contenido (Requisito 22.1, 22.3).
+# Si una clave declarada en los datos no existe aquí, el Validador_De_Datos
+# impide el inicio de la partida (Requisito 22.4).
+
+locale: "es"
+
+number_format:
+  decimal_separator: ","
+  thousands_separator: "."
+
+plural_rules: "spanish"        # n == 1 ⇒ singular; en otro caso plural
+
+strings:
+  # ======================================================== Terrenos ==
+  "terrain.prado.name": "Prado"
+  "terrain.prado.desc": "Tierra fértil para cultivos y ganado. El mejor sitio para empezar."
+  "terrain.tundra.name": "Tundra"
+  "terrain.tundra.desc": "Suelo frío y pobre: los cultivos rinden la mitad."
+  "terrain.desierto.name": "Desierto"
+  "terrain.desierto.desc": "Terreno hostil. No admite plantaciones y castiga a las casas."
+  "terrain.no_fertil.name": "Terreno no fértil"
+  "terrain.no_fertil.desc": "Roca desnuda. Nada crece aquí, pero minas y fábricas rinden más."
+  "terrain.oceano.name": "Océano"
+  "terrain.oceano.desc": "Solo admite construcciones navales. Esconde peces, ballenas y piratas."
+
+  # ================================================ Acciones genéricas ==
+  "action.recolectar.name": "Recolectar"
+  "action.talar.name": "Talar"
+
+  # ======================================================== Elementos ==
+  "element.montana.name": "Montaña"
+  "element.montana.desc": "Roca impracticable. Solo admite una mina y no se puede recolectar."
+  "element.bosque.name": "Bosque"
+  "element.bosque.desc": "Materia prima. Se puede talar de una vez o explotar con un aserradero adyacente."
+  "element.vaca.name": "Rebaño de vacas"
+  "element.vaca.desc": "Comida abundante. Se puede recolectar una vez o explotar con una granja."
+  "element.gallinas.name": "Corral de gallinas"
+  "element.gallinas.desc": "Poca comida, pero constante. Se puede recolectar o explotar con una granja."
+  "element.cabras.name": "Rebaño de cabras"
+  "element.cabras.desc": "El único animal doméstico que aguanta la tundra, aunque rinde menos allí."
+  "element.cerdos.name": "Piara de cerdos"
+  "element.cerdos.desc": "Comida y algún material. Se puede recolectar o explotar con una granja."
+  "element.peces.name": "Banco de peces"
+  "element.peces.desc": "Comida del mar. Requiere Navegación costera para aprovecharlo."
+  "element.ballenas.name": "Ballenas"
+  "element.ballenas.desc": "Una captura enorme. Requiere Navegación costera."
+  "element.poblado.name": "Poblado"
+  "element.poblado.desc": "Gente con sus propios acertijos. Plantea un puzzle de efecto permanente."
+  "element.misterio.name": "Misterio"
+  "element.misterio.desc": "Un enigma en el paisaje. Plantea un puzzle de efecto inmediato."
+  "element.lobos.name": "Manada de lobos"
+  "element.lobos.desc": "Animales peligrosos. Reducen la población cercana y reaparecen si dejas la casilla vacía."
+  "element.jabalies.name": "Piara de jabalíes"
+  "element.jabalies.desc": "Arrasan los alrededores del prado. Reducen la población cercana."
+  "element.leones.name": "Leones del desierto"
+  "element.leones.desc": "Cazadores del desierto. Reducen la población cercana."
+  "element.osos.name": "Osos"
+  "element.osos.desc": "La amenaza animal más dura. Reducen bastante la población cercana."
+  "element.barbaros.name": "Campamento bárbaro"
+  "element.barbaros.desc": "Amenaza humana. Drena la producción cercana, se expande y sube de nivel."
+  "element.piratas.name": "Guarida pirata"
+  "element.piratas.desc": "Amenaza humana del mar. Drena la producción cercana y se expande por el océano."
+
+  # ==================================================== Construcciones ==
+  "construction.casa.name": "Casa"
+  "construction.casa.desc": "Aloja población. Desde el nivel 2 también produce oro."
+  "construction.casa.level.1.name": "Refugio"
+  "construction.casa.level.2.name": "Casa de adobe"
+  "construction.casa.level.3.name": "Casa de piedra"
+  "construction.casa.level.4.name": "Casa señorial"
+
+  "construction.plantacion.name": "Plantación"
+  "construction.plantacion.desc": "Produce comida. Solo en prado, o en tundra a la mitad de rendimiento."
+  "construction.plantacion.level.1.name": "Huerto"
+  "construction.plantacion.level.2.name": "Plantación de regadío"
+  "construction.plantacion.level.3.name": "Campos de rotación"
+
+  "construction.granja.name": "Granja"
+  "construction.granja.desc": "Se monta sobre un animal doméstico y lo explota de forma continua."
+  "construction.granja.level.1.name": "Corral"
+  "construction.granja.level.2.name": "Establo"
+
+  "construction.bote_pesca.name": "Bote de pesca"
+  "construction.bote_pesca.desc": "Se monta sobre peces o ballenas y produce comida cada día."
+  "construction.bote_pesca.level.1.name": "Bote de pesca"
+  "construction.bote_pesca.level.2.name": "Barca de arrastre"
+
+  "construction.mina.name": "Mina"
+  "construction.mina.desc": "Se monta sobre una montaña. Produce materiales y oro, con bonus en terreno no fértil."
+  "construction.mina.level.1.name": "Mina"
+  "construction.mina.level.2.name": "Galerías profundas"
+
+  "construction.aserradero.name": "Aserradero"
+  "construction.aserradero.desc": "Produce materiales por cada bosque adyacente. Necesita al menos uno."
+  "construction.aserradero.level.1.name": "Aserradero"
+  "construction.aserradero.level.2.name": "Aserradero mecánico"
+
+  "construction.fabrica_herramientas.name": "Fábrica de herramientas"
+  "construction.fabrica_herramientas.desc": "Transforma materiales en oro. Sin insumos no produce nada ese día."
+  "construction.fabrica_herramientas.level.1.name": "Taller de herramientas"
+  "construction.fabrica_herramientas.level.2.name": "Fábrica de herramientas"
+
+  "construction.fabrica_pergaminos.name": "Fábrica de pergaminos"
+  "construction.fabrica_pergaminos.desc": "Transforma materiales en ciencia. Sin insumos no produce nada ese día."
+  "construction.fabrica_pergaminos.level.1.name": "Taller de pergaminos"
+  "construction.fabrica_pergaminos.level.2.name": "Fábrica de pergaminos"
+
+  "construction.centro_estudios.name": "Centro de estudios"
+  "construction.centro_estudios.desc": "Produce ciencia. Cada nivel emplea más eruditos y exige su tecnología."
+  "construction.centro_estudios.level.1.name": "Monasterio"
+  "construction.centro_estudios.level.2.name": "Escuela"
+  "construction.centro_estudios.level.3.name": "Gremio"
+  "construction.centro_estudios.level.4.name": "Universidad"
+
+  "construction.torre.name": "Torre de defensa"
+  "construction.torre.desc": "Impide la expansión enemiga en su radio. No produce ni aporta fuerza de combate."
+  "construction.torre.level.1.name": "Torre de vigía"
+  "construction.torre.level.2.name": "Fortaleza"
+
+  "construction.ciudad.name": "Ciudad"
+  "construction.ciudad.desc": "El corazón de la partida. Única, no demolible, solo evoluciona de nivel."
+  "construction.ciudad.level.1.name": "Aldea"
+  "construction.ciudad.level.2.name": "Villa"
+  "construction.ciudad.level.3.name": "Ciudad"
+  "construction.ciudad.level.4.name": "Ciudadela"
+
+  # ======================== Modificadores de producción (desglose en UI) ==
+  "modifier.casa.casa_adyacente": "Casa adyacente"
+  "modifier.casa.ciudad_adyacente_poblacion": "Ciudad adyacente"
+  "modifier.casa.ciudad_adyacente_oro": "Ciudad adyacente (oro)"
+  "modifier.casa.amenaza_adyacente_poblacion": "Amenaza adyacente"
+  "modifier.casa.amenaza_adyacente_oro": "Amenaza adyacente (oro)"
+  "modifier.casa.industria_adyacente": "Mina o fábrica adyacente"
+  "modifier.terreno.prado": "Terreno: prado"
+  "modifier.terreno.tundra": "Terreno: tundra"
+  "modifier.terreno.desierto": "Terreno: desierto"
+  "modifier.terreno.no_fertil": "Terreno: no fértil"
+  "modifier.terreno.oceano": "Terreno: océano"
+  "modifier.base": "Producción base del nivel"
+
+  # ====================================================== Tecnologías ==
+  "technology.center.name": "Conocimiento"
+  "technology.center.desc": "El centro del árbol. No se investiga: solo marca el arranque de las cinco ramas."
+  "technology.branch.casas.name": "Casas"
+  "technology.branch.alimentacion.name": "Alimentación"
+  "technology.branch.construccion.name": "Construcción"
+  "technology.branch.ejercito.name": "Ejército"
+  "technology.branch.ciencia.name": "Ciencia"
+
+  "technology.casas_adobe.name": "Casas de adobe"
+  "technology.casas_adobe.desc": "Permite mejorar las casas al nivel 2."
+  "technology.pozos_saneamiento.name": "Pozos y saneamiento"
+  "technology.pozos_saneamiento.desc": "Reduce a la mitad la probabilidad diaria de enfermedad."
+  "technology.casas_piedra.name": "Casas de piedra"
+  "technology.casas_piedra.desc": "Permite mejorar las casas al nivel 3."
+  "technology.urbanismo.name": "Urbanismo"
+  "technology.urbanismo.desc": "Mejora el bonus de población entre casas adyacentes."
+  "technology.casas_senoriales.name": "Casas señoriales"
+  "technology.casas_senoriales.desc": "Permite mejorar las casas al nivel 4."
+  "technology.ciudadela.name": "Ciudadela"
+  "technology.ciudadela.desc": "Permite elevar la ciudad al nivel 4."
+
+  "technology.ganaderia.name": "Ganadería"
+  "technology.ganaderia.desc": "Permite construir granjas sobre animales domésticos."
+  "technology.regadio.name": "Regadío"
+  "technology.regadio.desc": "Permite mejorar las plantaciones al nivel 2."
+  "technology.navegacion_costera.name": "Navegación costera"
+  "technology.navegacion_costera.desc": "Permite recolectar peces y ballenas y construir botes de pesca."
+  "technology.establos.name": "Establos"
+  "technology.establos.desc": "Permite mejorar las granjas al nivel 2."
+  "technology.conservacion_alimentos.name": "Conservación de alimentos"
+  "technology.conservacion_alimentos.desc": "Reduce el consumo diario de comida por habitante."
+  "technology.rotacion_cultivos.name": "Rotación de cultivos"
+  "technology.rotacion_cultivos.desc": "Permite mejorar las plantaciones al nivel 3."
+
+  "technology.mineria.name": "Minería"
+  "technology.mineria.desc": "Permite construir minas sobre las montañas."
+  "technology.carpinteria.name": "Carpintería"
+  "technology.carpinteria.desc": "Permite construir aserraderos junto a los bosques."
+  "technology.metalurgia.name": "Metalurgia"
+  "technology.metalurgia.desc": "Permite construir fábricas de conversión."
+  "technology.galerias_profundas.name": "Galerías profundas"
+  "technology.galerias_profundas.desc": "Permite mejorar las minas al nivel 2."
+  "technology.ingenieria.name": "Ingeniería"
+  "technology.ingenieria.desc": "Permite mejorar aserraderos, fábricas y botes de pesca al nivel 2."
+  "technology.maquinaria.name": "Maquinaria"
+  "technology.maquinaria.desc": "Reduce un día todos los tiempos de construcción."
+
+  "technology.caza.name": "Caza"
+  "technology.caza.desc": "Reduce a la mitad el coste en población al combatir animales."
+  "technology.armas_bronce.name": "Armas de bronce"
+  "technology.armas_bronce.desc": "Suma 2 puntos de fuerza en todos los combates."
+  "technology.vigias.name": "Vigías"
+  "technology.vigias.desc": "Adiestra arqueros y permite levantar torres de vigía."
+  "technology.armas_hierro.name": "Armas de hierro"
+  "technology.armas_hierro.desc": "Suma 4 puntos de fuerza en combate y sustituye al bronce."
+  "technology.fortificaciones.name": "Fortificaciones"
+  "technology.fortificaciones.desc": "Permite mejorar las torres al nivel 2, con radio de bloqueo 2."
+  "technology.estrategia.name": "Estrategia"
+  "technology.estrategia.desc": "Reduce a la mitad el coste en población de los combates."
+
+  "technology.escritura.name": "Escritura"
+  "technology.escritura.desc": "Permite construir el monasterio, primer centro de estudios."
+  "technology.ensenanza.name": "Enseñanza"
+  "technology.ensenanza.desc": "Permite mejorar el centro de estudios a escuela."
+  "technology.gremios.name": "Gremios"
+  "technology.gremios.desc": "Permite mejorar el centro de estudios a gremio."
+  "technology.metodo_cientifico.name": "Método científico"
+  "technology.metodo_cientifico.desc": "Aumenta un 25 % la ciencia de todos los centros de estudio."
+  "technology.academia.name": "Academia"
+  "technology.academia.desc": "Permite mejorar el centro de estudios a universidad."
+  "technology.imprenta.name": "Imprenta"
+  "technology.imprenta.desc": "Reduce un 20 % el coste en ciencia de todas las tecnologías."
+
+  # ================================================ Puzzles: poblados ==
+  "puzzle.poblado_guardianes.name": "Los Guardianes del Vado"
+  "puzzle.poblado_guardianes.text": >
+    Dos guardianes vigilan el paso del río. Uno dice siempre la verdad y el otro
+    miente siempre, pero no sabes quién es quién. Solo puedes hacer una pregunta
+    a uno de ellos para descubrir qué sendero cruza el vado.
+  "puzzle.poblado_guardianes.option.1.text": "¿Cuál es el sendero correcto?"
+  "puzzle.poblado_guardianes.option.2.text": "Si le preguntara al otro guardián cuál es el sendero correcto, ¿qué me diría?"
+  "puzzle.poblado_guardianes.option.3.text": "¿Eres tú el que dice la verdad?"
+  "puzzle.poblado_guardianes.success": "Los guardianes se suman a tus filas: +1 de fuerza en todos los combates."
+  "puzzle.poblado_guardianes.failure": "Los guardianes te cierran el paso: -1 de producción en los hexágonos adyacentes."
+
+  "puzzle.poblado_tejedores.name": "El Gremio de Tejedores"
+  "puzzle.poblado_tejedores.text": >
+    Tres tejedores hacen 3 mantas en 3 días. ¿Cuántos tejedores hacen falta para
+    tejer 9 mantas en 9 días?
+  "puzzle.poblado_tejedores.option.1.text": "3 tejedores"
+  "puzzle.poblado_tejedores.option.2.text": "6 tejedores"
+  "puzzle.poblado_tejedores.option.3.text": "9 tejedores"
+  "puzzle.poblado_tejedores.option.4.text": "27 tejedores"
+  "puzzle.poblado_tejedores.success": "El gremio abre una ruta comercial: +2 de oro por día."
+  "puzzle.poblado_tejedores.failure": "Hay que mantener al gremio: -1 de comida por día."
+
+  "puzzle.poblado_pozo_seco.name": "El Pozo Seco"
+  "puzzle.poblado_pozo_seco.text": >
+    Los aldeanos tienen dos cántaros, uno de 5 litros y otro de 3, y necesitan
+    medir exactamente 4 litros para reabrir el pozo. ¿Qué secuencia de trasvases
+    lo consigue?
+  "puzzle.poblado_pozo_seco.option.1.text": "Llenar el de 3 y volcarlo dos veces en el de 5."
+  "puzzle.poblado_pozo_seco.option.2.text": >
+    Llenar el de 5, volcarlo en el de 3, vaciar el de 3, pasar los 2 litros
+    restantes al de 3, llenar otra vez el de 5 y completar el de 3: quedan 4
+    litros en el grande.
+  "puzzle.poblado_pozo_seco.option.3.text": "Llenar los dos cántaros y vaciar el de 3 en el pozo."
+  "puzzle.poblado_pozo_seco.option.4.text": "Llenar el de 5 y verter la mitad a ojo."
+  "puzzle.poblado_pozo_seco.success": "Los aldeanos comparten el acuífero: las plantaciones adyacentes producen +1 de comida."
+  "puzzle.poblado_pozo_seco.failure": "El agua se contamina: la probabilidad diaria de enfermedad sube un 50 %."
+
+  "puzzle.poblado_senderos.name": "Los Senderos Contados"
+  "puzzle.poblado_senderos.text": >
+    Los rastreadores del poblado marcan los senderos con una sucesión grabada en
+    piedra: {secuencia}. ¿Qué número sigue?
+  "puzzle.poblado_senderos.option.text": "{valor}"
+  "puzzle.poblado_senderos.success": "Los rastreadores te guían: explorar cuesta un 20 % menos de población."
+  "puzzle.poblado_senderos.failure": "Los rastreadores te dan mal las señas: explorar cuesta un 25 % más de población."
+
+  # =============================================== Puzzles: misterios ==
+  "puzzle.misterio_monolito.name": "El Monolito de las Tres Cifras"
+  "puzzle.misterio_monolito.text": >
+    Un monolito guarda un número de {digitos} cifras. Estas son las pistas
+    grabadas en su base:
+  "puzzle.misterio_monolito.hint": "{numero}: {bien_colocadas} bien colocadas, {mal_colocadas} correctas pero mal colocadas."
+  "puzzle.misterio_monolito.option.text": "{valor}"
+  "puzzle.misterio_monolito.success": "Descifras el monolito: +40 de ciencia."
+  "puzzle.misterio_monolito.failure": "El monolito se derrumba: -3 de población."
+
+  "puzzle.misterio_balanza.name": "La Balanza del Mercader"
+  "puzzle.misterio_balanza.text": >
+    Ocho monedas iguales, una de ellas falsa y más ligera. ¿Cuál es el número
+    mínimo de pesadas en una balanza de dos platos que garantiza encontrarla?
+  "puzzle.misterio_balanza.option.1.text": "1 pesada"
+  "puzzle.misterio_balanza.option.2.text": "2 pesadas"
+  "puzzle.misterio_balanza.option.3.text": "3 pesadas"
+  "puzzle.misterio_balanza.option.4.text": "7 pesadas"
+  "puzzle.misterio_balanza.success": "El mercader paga su deuda: +50 de oro."
+  "puzzle.misterio_balanza.failure": "El mercader te engaña: -20 de materiales."
+
+  "puzzle.misterio_mapa_roto.name": "El Mapa Roto del Cartógrafo"
+  "puzzle.misterio_mapa_roto.text": >
+    Un mapa roto muestra un patrón incompleto de hexágonos. ¿Qué pieza falta
+    para completarlo?
+  "puzzle.misterio_mapa_roto.option.text": "Pieza {valor}"
+  "puzzle.misterio_mapa_roto.success": "Reconstruyes el mapa: se intuyen los 6 hexágonos de alrededor."
+  "puzzle.misterio_mapa_roto.failure": "El mapa se deshace entre tus manos: -1 de población."
+
+  "puzzle.misterio_granero.name": "El Granero Sellado"
+  "puzzle.misterio_granero.text": >
+    Una sucesión grabada en la puerta del granero: 2, 6, 12, 20, 30, ... ¿Qué
+    número sigue?
+  "puzzle.misterio_granero.option.1.text": "36"
+  "puzzle.misterio_granero.option.2.text": "40"
+  "puzzle.misterio_granero.option.3.text": "42"
+  "puzzle.misterio_granero.option.4.text": "44"
+  "puzzle.misterio_granero.success": "El granero se abre: +60 de comida."
+  "puzzle.misterio_granero.failure": "El grano está podrido: -15 de comida."
+
+  # ================================================ Escenario y misiones ==
+  "scenario.valle_inicial.name": "El valle inicial"
+  "scenario.valle_inicial.desc": >
+    Un valle templado con prados, bosques y montañas, rodeado de tundra, desierto
+    y mar. Hay vecinos con acertijos y hay quien no te quiere cerca.
+  "scenario.valle_inicial.objective.desc": "Mantener 25 de población total durante 3 días consecutivos."
+  "scenario.valle_inicial.reward.desc": "Control del valle inicial: recompensa permanente para el mapa de campaña."
+  "mission.poblacion_10.desc": "Alcanza 10 de población total."
+  "mission.explorar_6.desc": "Explora 6 hexágonos."
+  "mission.comida_60.desc": "Acumula 60 de comida."
+  "mission.tres_casas.desc": "Ten 3 casas completadas."
+  "mission.materiales_80.desc": "Acumula 80 de materiales."
+  "mission.explorar_20.desc": "Explora 20 hexágonos."
+  "mission.primeras_tecnologias.desc": "Investiga Ganadería y Minería."
+  "mission.poblacion_25.desc": "Alcanza 25 de población total."
+  "mission.poblacion_50.desc": "Alcanza 50 de población total."
+
+  # =============================================== Interfaz: general ==
+  "ui.app.title": "Hextown"
+  "ui.menu.main.title": "Hextown"
+  "ui.menu.new_game": "Nueva partida"
+  "ui.menu.continue": "Continuar"
+  "ui.menu.load": "Cargar partida"
+  "ui.menu.select_scenario": "Escenario"
+  "ui.menu.seed": "Semilla"
+  "ui.menu.start": "Empezar"
+  "ui.menu.back": "Volver"
+  "ui.menu.main": "Menú principal"
+
+  "ui.button.explore": "Explorar"
+  "ui.button.attack": "Atacar"
+  "ui.button.build": "Construir"
+  "ui.button.upgrade": "Mejorar de nivel"
+  "ui.button.demolish": "Demoler"
+  "ui.button.cancel_upgrade": "Cancelar mejora"
+  "ui.button.cancel_research": "Cancelar investigación"
+  "ui.button.research": "Investigar"
+  "ui.button.open_puzzle": "Ver el acertijo"
+  "ui.button.confirm": "Confirmar"
+  "ui.button.cancel": "Cancelar"
+  "ui.button.close": "Cerrar"
+  "ui.button.save": "Guardar"
+  "ui.button.next_event": "Siguiente evento"
+  "ui.button.play": "Play"
+  "ui.button.fast": "Avance rápido"
+  "ui.button.pause": "Parar"
+
+  "ui.clock.state.stopped": "Parado"
+  "ui.clock.state.play": "Play"
+  "ui.clock.state.fast": "Avance rápido"
+  "ui.clock.day": "Día {day}"
+  "ui.clock.fragment": "Fragmento {fragment}"
+  "ui.clock.day_fragment": "Día {day}, fragmento {fragment}"
+
+  "ui.resources.free_population": "Población libre"
+  "ui.resources.employed_population": "Población empleada"
+  "ui.resources.total_population": "Población total"
+  "ui.resources.food": "Comida"
+  "ui.resources.materials": "Materiales"
+  "ui.resources.science": "Ciencia"
+  "ui.resources.gold": "Oro"
+  "ui.resources.per_day": "Previsión al final del día: {delta}"
+
+  "ui.visibility.hidden": "Oculto"
+  "ui.visibility.dimmed": "Atenuado"
+  "ui.visibility.explored": "Explorado"
+
+  "ui.panel.objectives": "Objetivos"
+  "ui.panel.missions": "Misiones"
+  "ui.panel.tech_tree": "Árbol de tecnologías"
+  "ui.panel.event_log": "Registro de eventos"
+  "ui.panel.construction_menu": "Construir"
+  "ui.panel.puzzle": "Acertijo"
+  "ui.panel.hex_menu": "Hexágono {hex}"
+
+  "ui.objective.progress": "Progreso: {current} de {target}, {days} de {sustained} días consecutivos"
+  "ui.mission.completed": "Cumplida"
+  "ui.mission.pending": "Pendiente"
+
+  "ui.tech.status.researched": "Investigada"
+  "ui.tech.status.available": "Disponible"
+  "ui.tech.status.locked": "Bloqueada"
+  "ui.tech.cost": "Coste: {cost} de ciencia"
+  "ui.tech.time": "Tiempo: {days} días"
+  "ui.tech.dependencies": "Requiere: {list}"
+
+  "ui.hex.terrain": "Terreno: {terrain}"
+  "ui.hex.element": "Elemento: {element}"
+  "ui.hex.construction": "Construcción: {construction} (nivel {level})"
+  "ui.hex.threat": "Amenaza: {threat} (nivel {level})"
+  "ui.hex.effects": "Efectos activos: {list}"
+  "ui.hex.none": "Nada"
+
+  "ui.production.breakdown.title": "Desglose de producción"
+  "ui.action.in_progress": "En curso: {action}"
+  "ui.action.ends_at": "Termina el día {day}, fragmento {fragment}"
+  "ui.exploration.estimate": "Explorar: {days} días y {population} de población"
+  "ui.combat.estimate": "Atacar: {population} de población, {probability} % de victoria"
+  "ui.upgrade.estimate": "Nivel {level}: {cost}, {days} días, {workers} trabajadores"
+
+  # =============================================== Interfaz: rechazos ==
+  "ui.error.insufficient_resources": "Faltan recursos: {resource} requiere {required} y tienes {available}."
+  "ui.error.insufficient_population": "Población libre insuficiente: hacen falta {required} y tienes {available}."
+  "ui.error.population_would_end_game": "Esa acción consumiría toda la población."
+  "ui.error.only_dimmed_can_be_explored": "Solo se exploran hexágonos atenuados."
+  "ui.error.only_explored_can_be_built": "Solo se construye en hexágonos explorados."
+  "ui.error.exploration_in_progress": "Ya hay una exploración en curso en ese hexágono."
+  "ui.error.action_in_progress": "Ya hay una acción en curso en ese hexágono."
+  "ui.error.tech_locked": "Necesitas la tecnología {technology}."
+  "ui.error.terrain_not_allowed": "Ese terreno no admite esta construcción."
+  "ui.error.element_blocking": "El hexágono está ocupado por {element}."
+  "ui.error.needs_adjacent_forest": "El aserradero necesita al menos un bosque adyacente."
+  "ui.error.mountain_only_mine": "En una montaña solo se puede construir una mina."
+  "ui.error.demolish_before_harvest": "Demuele la construcción antes de recolectar el elemento."
+  "ui.error.cancel_upgrade_before_demolish": "Cancela la mejora en curso antes de demoler."
+  "ui.error.city_not_demolishable": "La Ciudad no es demolible."
+  "ui.error.city_unique": "Solo puede existir una Ciudad."
+  "ui.error.single_research": "Solo se admite una investigación simultánea."
+  "ui.error.population_total_required": "Hacen falta {required} de población total y tienes {available}."
+  "ui.error.game_over": "La partida ha terminado: no se admiten más acciones."
+
+  # =========================================== Fin de partida y avisos ==
+  "ui.game_end.victory": "Victoria"
+  "ui.game_end.defeat": "Derrota"
+  "ui.game_end.ended_day": "La partida terminó el día {day}."
+  "ui.game_end.view_map": "Consultar el mapa"
+  "ui.game_end.new_game": "Nueva partida"
+
+  "ui.generation.aborted": "No se ha podido generar un mapa válido."
+  "ui.generation.seed": "Semilla: {seed}"
+  "ui.generation.attempts": "Candidatos generados: {attempts}"
+  "ui.generation.violations": "Restricciones incumplidas: {list}"
+  "ui.generation.unknown_constraint": "Restricción no reconocida: {key}"
+
+  "ui.data.error": "{file} → {path}: {reason}"
+  "ui.data.duplicate_id": "Identificador duplicado {id} declarado en: {files}"
+  "ui.data.warning": "Advertencia en {file} → {path}: {reason}"
+  "ui.puzzles.insufficient": "Puzzles requeridos: {required}. Disponibles: {available}."
+
+  "ui.persistence.saved": "Partida guardada en la ranura {slot}."
+  "ui.persistence.save_failed": "No se ha podido guardar: {reason}. La partida sigue en memoria."
+  "ui.persistence.version_mismatch": "Guardado con formato {found}; esta versión admite {supported}."
+  "ui.persistence.missing_ids": "El guardado referencia datos que ya no existen: {ids}."
+
+  "ui.a11y.event_log_region": "Registro de eventos"
+  "ui.a11y.focus_indicator": "Hexágono con foco: {hex}"
+
+  # ============================================ Registro de eventos ==
+  "event.exploration_completed": "Exploración completada en {hex}."
+  "event.element_discovered": "En {hex} aparece {element}."
+  "event.construction_completed": "{construction} terminada en {hex}."
+  "event.upgrade_completed": "{construction} de {hex} sube al nivel {level}."
+  "event.upgrade_cancelled": "Mejora cancelada en {hex}."
+  "event.upgrade_lost": "Se pierde la mejora de {construction} al nivel {level} en {hex}."
+  "event.demolition_completed": "{construction} demolida en {hex}: vuelven {workers} trabajadores y {materials} de materiales."
+  "event.construction_sacrificed": "Se sacrifica {construction} en {hex} para cubrir la pérdida de población."
+  "event.construction_destroyed": "{construction} destruida en {hex} por {threat}."
+  "event.famine": "Hambruna: faltan {missing} de comida y mueren {lost} habitantes."
+  "event.disease": "Una enfermedad se lleva a {lost} habitantes."
+  "event.population_growth": "Nacen {gained} habitantes."
+  "event.factory_no_inputs": "{construction} de {hex} se queda sin {resource} y no produce hoy."
+  "event.sawmill_no_forest": "El aserradero de {hex} se queda sin bosques adyacentes y no produce."
+  "event.mounted_element_lost": "{construction} de {hex} pierde su {element} y deja de producir."
+  "event.threat_passive_population": "{threat} en {hex} se cobra {lost} de población."
+  "event.threat_expanded": "{threat} ocupa {hex}."
+  "event.threat_level_up": "{threat} de {hex} sube al nivel {level}."
+  "event.threat_respawn": "Vuelve a aparecer {threat} en {hex}."
+  "event.combat_victory": "Victoria contra {threat} en {hex}: se pierden {cost} de población."
+  "event.combat_defeat": "Derrota contra {threat} en {hex}: se pierden {cost} de población y la amenaza queda al {damage} % de daño."
+  "event.research_completed": "Investigación completada: {technology}."
+  "event.research_cancelled": "Investigación cancelada: {technology}. Se recuperan {science} de ciencia."
+  "event.level_locked": "{construction} pierde el acceso al nivel {level}."
+  "event.puzzle_resolved": "Acertijo resuelto en {hex}: {result}."
+  "event.puzzle_effect_capped": "No se pudo aplicar {amount} de {resource}: el recurso ya estaba a 0."
+  "event.mission_completed": "Misión cumplida: {mission}."
+  "event.objective_completed": "Objetivo principal cumplido: {objective}."
+  "event.defeat": "La población ha llegado a 0. Fin de la partida."
+  "event.sprite_missing": "No se encontró el sprite {id} en el atlas: se dibuja el pixel art generado."
+  "event.missing_text_key": "Falta la clave de texto {key} en el catálogo activo."
+  "event.autosave_failed": "El autoguardado ha fallado: {reason}."

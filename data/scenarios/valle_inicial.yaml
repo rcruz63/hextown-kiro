@@ -1,0 +1,164 @@
+# Escenario por defecto: El valle inicial (Requisitos 1, 4.1, 15, 20.1)
+#
+# El escenario define el mapa, los recursos iniciales, el objetivo principal y
+# las misiones intermedias de una partida.
+
+scenario:
+  id: "valle_inicial"
+  name_key: "scenario.valle_inicial.name"
+  desc_key: "scenario.valle_inicial.desc"
+
+  map:
+    radius: 8                       # ~217 hexágonos (Requisito 1.1)
+    seed: 12345                     # semilla por defecto; el menú principal puede sustituirla
+    city_construction_id: "ciudad"  # construcción del hexágono central (Requisito 1.2)
+
+    # Proporción esperada de cada terreno. La elección es proporcional al peso
+    # declarado (Requisito 1.3).
+    terrain_weights:
+      prado: 30
+      tundra: 20
+      desierto: 15
+      no_fertil: 15
+      oceano: 20
+
+    # Densidad por elemento: instancias = min(redondeo(densidad × hexágonos con
+    # terreno permitido), hexágonos elegibles sin elemento) (Requisito 1.4).
+    # Los elementos se colocan en el orden en que están declarados en
+    # elements.yaml.
+    element_density:
+      montana: 0.06
+      bosque: 0.09
+      vaca: 0.05
+      gallinas: 0.04
+      cabras: 0.03
+      cerdos: 0.03
+      peces: 0.12
+      ballenas: 0.05
+      poblado: 0.02
+      misterio: 0.025
+      lobos: 0.03
+      jabalies: 0.025
+      leones: 0.05
+      osos: 0.025
+      barbaros: 0.02
+      piratas: 0.04
+
+    # Garantías que todo mapa candidato debe cumplir (Requisito 1.5). Si un
+    # candidato incumple alguna, se descarta y se genera otro con la siguiente
+    # subsemilla (Requisito 1.6).
+    constraints:
+      prados_adyacentes_a_ciudad_minimo: 1
+      porcentaje_prado_minimo: 20
+      montanas_minimas: 8
+      bosques_minimos: 10
+      amenazas_maximas: 16
+      distancia_minima_amenaza_humana: 4
+      nivel_amenaza_por_anillo: 0.5     # nivel = 1 + piso(D × este valor) (1.10)
+      intentos_maximos: 50              # candidatos antes de abortar (1.7, 1.8)
+
+  # Recursos iniciales (Requisito 4.1)
+  starting_resources:
+    poblacion_libre: 5
+    poblacion_empleada: 0
+    comida: 30
+    materiales: 10
+    ciencia: 0
+    oro: 0
+
+  # Objetivo principal único (Requisito 15.1 a 15.4)
+  main_objective:
+    id: "valle_poblacion_25"
+    desc_key: "scenario.valle_inicial.objective.desc"
+    condition:
+      type: "recurso_acumulado"
+      resource: "poblacion_total"
+      amount: 25
+      sustained_days: 3
+    reward_permanent:
+      id: "valle_inicial_controlado"
+      desc_key: "scenario.valle_inicial.reward.desc"
+
+  # Misiones intermedias: se cumplen una sola vez y son la principal fuente de
+  # ciencia temprana (Requisito 15.5, 15.7).
+  missions:
+    - id: "poblacion_10"
+      desc_key: "mission.poblacion_10.desc"
+      condition:
+        type: "recurso_acumulado"
+        resource: "poblacion_total"
+        amount: 10
+      reward:
+        ciencia: 20
+
+    - id: "explorar_6"
+      desc_key: "mission.explorar_6.desc"
+      condition:
+        type: "hexagonos_explorados"
+        amount: 6
+      reward:
+        ciencia: 25
+
+    - id: "comida_60"
+      desc_key: "mission.comida_60.desc"
+      condition:
+        type: "recurso_acumulado"
+        resource: "comida"
+        amount: 60
+      reward:
+        ciencia: 20
+
+    - id: "tres_casas"
+      desc_key: "mission.tres_casas.desc"
+      condition:
+        type: "construcciones_completadas"
+        construction: "casa"
+        min_level: 1
+        amount: 3
+      reward:
+        ciencia: 25
+
+    - id: "materiales_80"
+      desc_key: "mission.materiales_80.desc"
+      condition:
+        type: "recurso_acumulado"
+        resource: "materiales"
+        amount: 80
+      reward:
+        ciencia: 30
+
+    - id: "explorar_20"
+      desc_key: "mission.explorar_20.desc"
+      condition:
+        type: "hexagonos_explorados"
+        amount: 20
+      reward:
+        ciencia: 35
+
+    - id: "primeras_tecnologias"
+      desc_key: "mission.primeras_tecnologias.desc"
+      condition:
+        type: "tecnologias_investigadas"
+        technologies: ["ganaderia", "mineria"]
+      reward:
+        ciencia: 30
+        oro: 20
+
+    - id: "poblacion_25"
+      desc_key: "mission.poblacion_25.desc"
+      condition:
+        type: "recurso_acumulado"
+        resource: "poblacion_total"
+        amount: 25
+      reward:
+        ciencia: 40
+
+    - id: "poblacion_50"
+      desc_key: "mission.poblacion_50.desc"
+      condition:
+        type: "recurso_acumulado"
+        resource: "poblacion_total"
+        amount: 50
+      reward:
+        ciencia: 60
+        oro: 40

@@ -31,13 +31,13 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
     - Crear `src/core/result.ts` con tipo `Result<T, E>`
     - _Requisitos: 4.1, 4.18, 5.1_
 
-  - [ ]* 1.5 Escribir tests de propiedades para hex math y RNG
+  - [x] 1.5 Escribir tests de propiedades para hex math y RNG
     - **Propiedad 1: Determinismo del RNG** — dos ejecuciones con misma semilla producen misma secuencia
     - **Propiedad 10 (parcial): Determinismo de simulación** — base de RNG determinista
     - **Valida: Requisitos 1.12, 5.19**
 
-- [ ] 2. Capa de datos: cargador, validador y serializador YAML
-  - [ ] 2.1 Implementar el Cargador de Datos YAML
+- [x] 2. Capa de datos: cargador, validador y serializador YAML
+  - [x] 2.1 Implementar el Cargador de Datos YAML
     - Crear `src/data/loader.ts`
     - Parsear ficheros YAML: terrains, elements, constructions, technologies, puzzles, scenarios, rules, i18n
     - Aplicar valores por defecto de reglas globales a campos opcionales ausentes
@@ -45,7 +45,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
     - Devolver `Result<GameData, GameError[]>` sin lanzar excepciones
     - _Requisitos: 20.1, 20.2, 20.3, 22.3_
 
-  - [ ] 2.2 Implementar el Validador de Datos
+  - [x] 2.2 Implementar el Validador de Datos
     - Crear `src/data/validator.ts`
     - Validar esquema de cada fichero
     - Validar referencias cruzadas entre terrenos, elementos, construcciones, tecnologías, puzzles y escenarios
@@ -56,24 +56,24 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
     - Retornar `ValidationReport` con errores bloqueantes y advertencias
     - _Requisitos: 20.3, 20.4, 20.5, 20.6, 11.14, 7.14, 15.7, 22.4_
 
-  - [ ] 2.3 Implementar el Serializador de Datos
+  - [x] 2.3 Implementar el Serializador de Datos
     - Crear `src/data/serializer.ts`
     - Escribir estructuras de datos válidas a formato YAML aceptado por el Cargador
     - _Requisitos: 20.8_
 
-  - [ ] 2.4 Crear ficheros de datos YAML para el escenario inicial
+  - [x] 2.4 Crear ficheros de datos YAML para el escenario inicial
     - Crear `data/rules.yaml`, `data/terrains.yaml`, `data/elements.yaml`, `data/constructions.yaml`, `data/technologies.yaml`, `data/puzzles/settlements.yaml`, `data/puzzles/mysteries.yaml`, `data/scenarios/valle_inicial.yaml`, `data/i18n/es.yaml`
     - Incluir todo el contenido definido en las especificaciones
     - _Requisitos: 20.1, 16.15, 16.16_
 
-  - [ ] 2.5 Implementar el Gestor de Textos (i18n)
+  - [x] 2.5 Implementar el Gestor de Textos (i18n)
     - Crear `src/data/texts.ts`
     - Resolver claves a cadenas del idioma activo
     - Aplicar formato de números y forma plural del catálogo
     - Devolver la clave como fallback si no existe en el catálogo activo
     - _Requisitos: 22.1, 22.2, 22.5, 22.6, 22.7_
 
-  - [ ]* 2.6 Escribir tests de propiedades para datos YAML e i18n
+  - [x] 2.6 Escribir tests de propiedades para datos YAML e i18n
     - **Propiedad 35: Ida y vuelta de datos YAML** — cargar → serializar → cargar produce resultado equivalente
     - **Propiedad 36: Manejo robusto de YAML inválido** — errores informativos sin excepciones
     - **Propiedad 38: Completitud de catálogos de idioma** — claves del español presentes en otros catálogos
