@@ -79,7 +79,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
     - **Propiedad 38: Completitud de catálogos de idioma** — claves del español presentes en otros catálogos
     - **Valida: Requisitos 20.9, 20.10, 20.11, 22.8**
 
-- [ ] 3. Checkpoint - Asegurar que los tests pasan
+- [x] 3. Checkpoint - Asegurar que los tests pasan
   - Ejecutar `vitest --run` y verificar que todos los tests de la capa de datos pasan, preguntar al usuario si surgen dudas.
 
 - [ ] 4. Generación procedural del mapa
