@@ -82,8 +82,8 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
 - [x] 3. Checkpoint - Asegurar que los tests pasan
   - Ejecutar `vitest --run` y verificar que todos los tests de la capa de datos pasan, preguntar al usuario si surgen dudas.
 
-- [ ] 4. Generación procedural del mapa
-  - [ ] 4.1 Implementar el Generador de Mapa
+- [~] 4. Generación procedural del mapa
+  - [x] 4.1 Implementar el Generador de Mapa
     - Crear `src/core/map-generator.ts`
     - Algoritmo: crear hexágonos en espiral, asignar terreno central compatible con Ciudad, asignar terrenos por peso, colocar Ciudad nivel 1, colocar elementos en orden declarado respetando densidades y terrenos permitidos
     - Asignar niveles a amenazas según distancia: `1 + floor(D × nivel_amenaza_por_anillo)`
@@ -94,7 +94,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
     - Retornar `GenerationResult`
     - _Requisitos: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 1.10, 1.11_
 
-  - [ ]* 4.2 Escribir tests de propiedades para el generador de mapa
+  - [ ] 4.2 Escribir tests de propiedades para el generador de mapa
     - **Propiedad 1: Determinismo del generador** — misma semilla y escenario → mapa idéntico
     - **Propiedad 2: Invariantes estructurales** — 0 o 1 elementos por hex, niveles de amenaza crecientes con distancia, restricciones cumplidas
     - **Valida: Requisitos 1.12, 1.13, 1.14, 1.15**
@@ -117,7 +117,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
     - Al completar: llamar a `revealHex`, revelar elemento, pausar si misterio/poblado/amenaza
     - _Requisitos: 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 3.10_
 
-  - [ ]* 5.3 Escribir tests de propiedades para visibilidad y exploración
+  - [ ] 5.3 Escribir tests de propiedades para visibilidad y exploración
     - **Propiedad 3: Invariantes de visibilidad** — atenuado tiene vecino explorado, oculto no adyacente a explorado, sin retrocesos
     - **Propiedad 4: Monotonía del coste de exploración** — D1 ≤ D2 → tiempo(D1) ≤ tiempo(D2) y coste(D1) ≤ coste(D2)
     - **Propiedad 5: Contabilidad de población — consumo** — PoblacionTotal post = pre - coste
@@ -137,7 +137,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
     - Algoritmo de sacrificio de construcciones ante pérdida de población
     - _Requisitos: 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 4.10, 4.11, 4.12, 4.15, 4.16, 4.17_
 
-  - [ ]* 6.2 Escribir tests de propiedades para recursos y población
+  - [ ] 6.2 Escribir tests de propiedades para recursos y población
     - **Propiedad 6: Invariante fundamental de población** — Poblacion_Total = Libre + Empleada, recursos ≥ 0
     - **Propiedad 7: Contabilidad de población — empleo** — construcción/mejora no cambia Poblacion_Total
     - **Propiedad 8: Pérdida de población con sacrificio** — Poblacion_Total resultante = max(0, anterior - P)
@@ -156,7 +156,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
     - Aplicar `max(1, ceil(tiempo))` cuando efectos globales reducen tiempo
     - _Requisitos: 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 5.12, 5.13, 5.14, 5.15, 5.16, 5.17_
 
-  - [ ]* 7.2 Escribir tests de propiedades para el reloj y programación
+  - [ ] 7.2 Escribir tests de propiedades para el reloj y programación
     - **Propiedad 9: Programación preserva fragmento** — acción solicitada en fragmento f termina en fragmento f
     - **Propiedad 10: Determinismo de la simulación** — misma semilla + mismas acciones → mismo estado
     - **Propiedad 11: Independencia del orden de registro en producción** — resultado de Fin_De_Dia independiente del orden interno
@@ -203,7 +203,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
     - Recalcular adyacencia cuando cambia contenido de hex vecino
     - _Requisitos: 6.10, 6.11, 6.12, 6.13, 9.9_
 
-  - [ ]* 9.5 Escribir tests de propiedades para construcciones, niveles y producción
+  - [ ] 9.5 Escribir tests de propiedades para construcciones, niveles y producción
     - **Propiedad 12: No-negatividad de producción** — producción ≥ 0 para cualquier configuración
     - **Propiedad 13: Monotonía de costes por nivel** — tiempo, coste y trabajadores crecientes
     - **Propiedad 14: Contabilidad de demolición** — Poblacion_Libre post = pre + T, Poblacion_Total invariante
@@ -233,7 +233,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
     - Fábricas excluidas del paso de producción general (producción 0 ahí)
     - _Requisitos: 10.1, 10.2, 10.3, 10.4, 10.5, 10.6_
 
-  - [ ]* 10.3 Escribir tests de propiedades para explotación y fábricas
+  - [ ] 10.3 Escribir tests de propiedades para explotación y fábricas
     - **Propiedad 16: Recolección elimina elemento y aplica recompensa una sola vez**
     - **Propiedad 17: Completitud de datos de granjas** — producción ≥ 0 e idéntica en dos evaluaciones
     - **Propiedad 18: Fábricas — todo o nada** — consumo y producción completos o ambos nulos
@@ -253,7 +253,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
     - Máximo una investigación simultánea
     - _Requisitos: 11.1, 11.2, 11.4, 11.5, 11.6, 11.7, 11.8, 11.9, 11.10, 11.11, 11.12_
 
-  - [ ]* 11.2 Escribir tests de propiedades para tecnologías
+  - [ ] 11.2 Escribir tests de propiedades para tecnologías
     - **Propiedad 20: Clausura de dependencias** — tecnologías investigadas cerradas respecto a dependencias
     - **Propiedad 21: Contabilidad de costes de investigación** — coste total = suma costes con modificadores del momento de inicio
     - **Valida: Requisitos 11.15, 11.16**
@@ -291,7 +291,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
     - Trabajadores de torres = Poblacion_Empleada, excluidos de combate
     - _Requisitos: 14.1, 14.2, 14.3, 14.4, 14.5, 14.6, 14.7, 14.8_
 
-  - [ ]* 12.4 Escribir tests de propiedades para amenazas, combate y defensa
+  - [ ] 12.4 Escribir tests de propiedades para amenazas, combate y defensa
     - **Propiedad 22: Probabilidades de amenazas acotadas** — reaparición y expansión en [0, 1]
     - **Propiedad 23: Hexágonos de expansión excluyen prohibidos** — Ciudad, torres, otra amenaza, poblado, misterio
     - **Propiedad 24: Probabilidad de victoria acotada** — en [1/dado², 1 - 1/dado²]
@@ -328,7 +328,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
     - Mapa Roto del Cartógrafo: atenuar 6 vecinos ocultos al acertar
     - _Requisitos: 16.1, 16.2, 16.3, 16.4, 16.5, 16.6, 16.7, 16.8, 16.9, 16.10, 16.11, 16.12, 16.13, 16.14, 16.17_
 
-  - [ ]* 13.3 Escribir tests de propiedades para objetivos y puzzles
+  - [ ] 13.3 Escribir tests de propiedades para objetivos y puzzles
     - **Propiedad 30: Misiones otorgan recompensa como máximo una vez**
     - **Propiedad 31: Contador del objetivo acotado** — en [0, sustained_days]
     - **Propiedad 32: Invariantes de puzzles instanciados** — ≥ 2 opciones, exactamente 1 correcta, determinista
@@ -356,7 +356,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
     - Almacenar en `GameState.eventLog`
     - _Requisitos: 3.7, 4.6, 4.9, 4.11, 10.3, 12.19_
 
-  - [ ]* 15.3 Escribir tests de integración para el bucle de juego completo
+  - [ ] 15.3 Escribir tests de integración para el bucle de juego completo
     - Test end-of-day: verificar orden fijo de 12 pasos con estado concreto del escenario valle_inicial
     - Test full-game-loop: simular 10 días con acciones programadas, verificar determinismo
     - Test edge cases: población 0 → derrota, victoria + derrota simultánea → victoria
@@ -373,7 +373,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
     - Si localStorage falla → mantener partida en memoria, mostrar error
     - _Requisitos: 21.1, 21.2, 21.3, 21.4, 21.5, 21.6, 21.7_
 
-  - [ ]* 16.2 Escribir tests de propiedades para persistencia
+  - [ ] 16.2 Escribir tests de propiedades para persistencia
     - **Propiedad 37: Ida y vuelta de persistencia con continuidad de simulación** — guardar/cargar + simular = simular sin guardar
     - **Valida: Requisitos 21.8, 21.9**
 
@@ -410,7 +410,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
     - Mantener 30 FPS en mapa radio 8 con todos los hex explorados
     - _Requisitos: 19.9_
 
-  - [ ]* 18.4 Escribir tests de propiedades para render
+  - [ ] 18.4 Escribir tests de propiedades para render
     - **Propiedad 34: Determinismo del render** — misma semilla + id + nivel + frame → misma imagen
     - **Valida: Requisitos 19.10**
 
@@ -497,7 +497,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
     - Flujo de carga de partida guardada
     - _Requisitos: 5.9, 5.15, 15.6, 15.12, 17.13, 17.14, 21.4_
 
-  - [ ]* 21.3 Escribir tests de integración end-to-end
+  - [ ] 21.3 Escribir tests de integración end-to-end
     - Test: iniciar partida → explorar → construir → avanzar días → verificar producción
     - Test: investigar tech → desbloquear construcción → construir → verificar
     - Test: combate → victoria/derrota → verificar estado
