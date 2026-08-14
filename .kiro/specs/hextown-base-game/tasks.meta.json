@@ -156,6 +156,30 @@
         "chatSessionId": "sess_84690210-d9df-434f-b8e5-395215f2ba2d",
         "timestamp": 1786538634468
       }
+    ],
+    "3. Checkpoint - Asegurar que los tests pasan": [
+      {
+        "executionId": "642a11a9-7781-43cf-a92b-7ec1a90c34c8",
+        "chatSessionId": "sess_44bcb2f3-d5a6-4154-abee-d52b5fbcd5bc",
+        "timestamp": 1786609291676
+      },
+      {
+        "executionId": "642a11a9-7781-43cf-a92b-7ec1a90c34c8",
+        "chatSessionId": "sess_44bcb2f3-d5a6-4154-abee-d52b5fbcd5bc",
+        "timestamp": 1786610254341
+      }
+    ],
+    "4.1 Implementar el Generador de Mapa": [
+      {
+        "executionId": "0c4f1ddd-be86-4954-be7e-7240ab97c581",
+        "chatSessionId": "sess_48545e0d-422f-48f3-b5f2-68ce4512b195",
+        "timestamp": 1786613699157
+      },
+      {
+        "executionId": "0c4f1ddd-be86-4954-be7e-7240ab97c581",
+        "chatSessionId": "sess_48545e0d-422f-48f3-b5f2-68ce4512b195",
+        "timestamp": 1786620069951
+      }
     ]
   }
 }

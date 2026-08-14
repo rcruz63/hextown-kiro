@@ -76,6 +76,16 @@ function assertRadius(radius: number, fnName: string): void {
 }
 
 /**
+ * Clave canónica de una coordenada, `` `${q},${r}` ``.
+ *
+ * Es el índice de `HexMap.cells` y la clave con la que el guardado referencia
+ * cada hexágono, por lo que su formato es parte del contrato del mapa.
+ */
+export function hexKey(coord: AxialCoord): string {
+  return `${String(coord.q)},${String(coord.r)}`;
+}
+
+/**
  * Distancia hexagonal entre dos celdas: número de hexágonos del camino más
  * corto que las une.
  */
