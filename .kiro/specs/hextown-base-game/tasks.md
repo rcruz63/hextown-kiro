@@ -82,7 +82,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
 - [x] 3. Checkpoint - Asegurar que los tests pasan
   - Ejecutar `vitest --run` y verificar que todos los tests de la capa de datos pasan, preguntar al usuario si surgen dudas.
 
-- [~] 4. Generación procedural del mapa
+- [x] 4. Generación procedural del mapa
   - [x] 4.1 Implementar el Generador de Mapa
     - Crear `src/core/map-generator.ts`
     - Algoritmo: crear hexágonos en espiral, asignar terreno central compatible con Ciudad, asignar terrenos por peso, colocar Ciudad nivel 1, colocar elementos en orden declarado respetando densidades y terrenos permitidos
@@ -99,7 +99,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
     - **Propiedad 2: Invariantes estructurales** — 0 o 1 elementos por hex, niveles de amenaza crecientes con distancia, restricciones cumplidas
     - **Valida: Requisitos 1.12, 1.13, 1.14, 1.15**
 
-  - [ ] 4.3 Documentar el estado actual y crear el README general
+  - [x] 4.3 Documentar el estado actual y crear el README general
     - **Historia de usuario:** como desarrollador humano quiero modificar un aspecto del juego y necesito saber qué ficheros tocar, qué requisitos me constriñen, qué convenciones y nomenclatura seguir y cómo verificar que no he roto nada.
     - Crear `README.md`: qué es Hextown, requisitos previos (Node >= 20.11), `npm install`, `npm run dev`, `npm test`, `npm run typecheck`, `npm run build`, mapa de directorios de primer nivel, aviso de que `data/` es la fuente de verdad del balance y que el código es genérico, y enlaces a la especificación y a las guías de `docs/`
     - Crear `docs/arquitectura.md`: tabla módulo → responsabilidad → requisitos que cumple → ficheros de test, con el estado de implementación de cada componente y las reglas de capas (`src/core/` sin DOM ni dependencias de `render/` ni `ui/`; `render/` lee el estado y nunca lo muta)
