@@ -82,7 +82,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
 - [x] 3. Checkpoint - Asegurar que los tests pasan
   - Ejecutar `vitest --run` y verificar que todos los tests de la capa de datos pasan, preguntar al usuario si surgen dudas.
 
-- [~] 4. Generación procedural del mapa
+- [x] 4. Generación procedural del mapa
   - [x] 4.1 Implementar el Generador de Mapa
     - Crear `src/core/map-generator.ts`
     - Algoritmo: crear hexágonos en espiral, asignar terreno central compatible con Ciudad, asignar terrenos por peso, colocar Ciudad nivel 1, colocar elementos en orden declarado respetando densidades y terrenos permitidos
@@ -99,7 +99,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
     - **Propiedad 2: Invariantes estructurales** — 0 o 1 elementos por hex, niveles de amenaza crecientes con distancia, restricciones cumplidas
     - **Valida: Requisitos 1.12, 1.13, 1.14, 1.15**
 
-  - [ ] 4.3 Documentar el estado actual y crear el README general
+  - [x] 4.3 Documentar el estado actual y crear el README general
     - **Historia de usuario:** como desarrollador humano quiero modificar un aspecto del juego y necesito saber qué ficheros tocar, qué requisitos me constriñen, qué convenciones y nomenclatura seguir y cómo verificar que no he roto nada.
     - Crear `README.md`: qué es Hextown, requisitos previos (Node >= 20.11), `npm install`, `npm run dev`, `npm test`, `npm run typecheck`, `npm run build`, mapa de directorios de primer nivel, aviso de que `data/` es la fuente de verdad del balance y que el código es genérico, y enlaces a la especificación y a las guías de `docs/`
     - Crear `docs/arquitectura.md`: tabla módulo → responsabilidad → requisitos que cumple → ficheros de test, con el estado de implementación de cada componente y las reglas de capas (`src/core/` sin DOM ni dependencias de `render/` ni `ui/`; `render/` lee el estado y nunca lo muta)
@@ -175,7 +175,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
 - [ ] 8. Checkpoint - Asegurar que los tests pasan
   - Ejecutar `vitest --run` y verificar que todos los tests del núcleo de simulación pasan, preguntar al usuario si surgen dudas.
 
-  - [ ] 8.1 Actualizar la documentación de la fase
+  - [ ] 8.1 Actualizar la documentación de la fase (visibilidad, exploración, recursos, reloj)
     - Añadir a `docs/arquitectura.md` el Gestor de Visibilidad, el Sistema de Exploración, el Gestor de Recursos y el Reloj de Juego, con sus requisitos y sus ficheros de test
     - Añadir a `docs/modificar-el-juego.md` las recetas de la fase: ajustar el coste y el tiempo de exploración, el consumo de comida y la probabilidad de enfermedad, y cambiar el número de fragmentos del día
     - Documentar el modelo de población (consumo frente a empleo) y el invariante `Poblacion_Total = Libre + Empleada`, que es la trampa más fácil de romper al añadir una acción nueva
@@ -354,7 +354,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
 - [ ] 14. Checkpoint - Asegurar que los tests de lógica pasan
   - Ejecutar `vitest --run` y verificar que todos los tests de la capa de lógica de juego pasan, preguntar al usuario si surgen dudas.
 
-  - [ ] 14.1 Actualizar la documentación de la fase
+  - [ ] 14.1 Actualizar la documentación de la fase (construcciones, explotación, tecnologías, amenazas, objetivos)
     - Añadir a `docs/arquitectura.md` construcciones, niveles, demolición, producción, explotación, fábricas, investigación, amenazas, combate, defensa, objetivos y puzzles
     - Completar en `docs/modificar-el-juego.md` las recetas de contenido, que son las que un diseñador va a usar a diario: nueva construcción con sus niveles y modificadores de terreno y adyacencia, nueva tecnología con dependencias y desbloqueos, nueva amenaza con su expansión y su combate, nuevo puzzle fijo y nuevo tipo de fábrica
     - Documentar la fórmula de producción y el orden en que se aplican modificador de terreno y modificadores de adyacencia, porque el orden cambia el resultado
@@ -558,8 +558,19 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
 
 ### Política de documentación
 
+Las tareas de documentación van colgadas de los checkpoints, así que no aparecen como tareas de primer nivel. Éste es su índice:
+
+| Tarea | Cuándo | Qué documenta |
+|---|---|---|
+| 4.3 | Hecha | README, arquitectura, convenciones, recetas y steering iniciales |
+| 8.1 | Checkpoint 8 | Visibilidad, exploración, recursos, reloj |
+| 14.1 | Checkpoint 14 | Construcciones, explotación, fábricas, tecnologías, amenazas, combate, objetivos, puzzles |
+| 17.1 | Checkpoint 17 | Núcleo de simulación, registro de eventos, persistencia |
+| 22.1 | Checkpoint 22 | Render, interfaz, entrada, y cierre del README |
+
 - La especificación (`requirements.md`, `design.md`, `tasks.md`) describe **qué** hay que construir y **por qué**. La documentación de `docs/` describe **dónde** está cada cosa y **cómo** modificarla sin romper nada. Son complementarias y ninguna sustituye a la otra.
-- Cada fase termina con una tarea de documentación (4.3, 8.1, 14.1, 17.1, 22.1) que pone al día `docs/arquitectura.md` y `docs/modificar-el-juego.md` con los módulos de esa fase. La documentación no se deja para el final: se paga al cerrar cada fase, cuando el contexto todavía está fresco.
+- La documentación no se deja para el final: se paga al cerrar cada fase, cuando el contexto todavía está fresco.
+- Entre un checkpoint y el siguiente, la responsabilidad es de cada tarea: la cabecera JSDoc del módulo y cualquier convención nueva se escriben **en el mismo commit que el código**, no se aplazan a la tarea de documentación de la fase. Las tareas 8.1, 14.1, 17.1 y 22.1 consolidan y revisan, no escriben desde cero.
 - Los tres documentos de `docs/` tienen destinatarios distintos: `arquitectura.md` responde «en qué fichero se hace esto», `convenciones.md` responde «cómo se escribe aquí», y `modificar-el-juego.md` responde «qué toco para conseguir X».
 - Las convenciones se publican por duplicado a propósito: en `docs/` para el desarrollador humano y en `.kiro/steering/` para las sesiones de Kiro, que solo aplican de forma automática lo que viva en steering. Los ficheros de steering referencian los de `docs/` con `#[[file:...]]` en lugar de copiar el contenido.
 - Cada módulo mantiene su cabecera JSDoc con el algoritmo y los requisitos que cumple. Esa cabecera es la documentación de primera línea y va en el mismo commit que el código, no en la tarea de documentación de la fase.
