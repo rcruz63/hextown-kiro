@@ -82,7 +82,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
 - [x] 3. Checkpoint - Asegurar que los tests pasan
   - Ejecutar `vitest --run` y verificar que todos los tests de la capa de datos pasan, preguntar al usuario si surgen dudas.
 
-- [x] 4. Generación procedural del mapa
+- [~] 4. Generación procedural del mapa
   - [x] 4.1 Implementar el Generador de Mapa
     - Crear `src/core/map-generator.ts`
     - Algoritmo: crear hexágonos en espiral, asignar terreno central compatible con Ciudad, asignar terrenos por peso, colocar Ciudad nivel 1, colocar elementos en orden declarado respetando densidades y terrenos permitidos
@@ -98,6 +98,16 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
     - **Propiedad 1: Determinismo del generador** — misma semilla y escenario → mapa idéntico
     - **Propiedad 2: Invariantes estructurales** — 0 o 1 elementos por hex, niveles de amenaza crecientes con distancia, restricciones cumplidas
     - **Valida: Requisitos 1.12, 1.13, 1.14, 1.15**
+
+  - [ ] 4.3 Documentar el estado actual y crear el README general
+    - **Historia de usuario:** como desarrollador humano quiero modificar un aspecto del juego y necesito saber qué ficheros tocar, qué requisitos me constriñen, qué convenciones y nomenclatura seguir y cómo verificar que no he roto nada.
+    - Crear `README.md`: qué es Hextown, requisitos previos (Node >= 20.11), `npm install`, `npm run dev`, `npm test`, `npm run typecheck`, `npm run build`, mapa de directorios de primer nivel, aviso de que `data/` es la fuente de verdad del balance y que el código es genérico, y enlaces a la especificación y a las guías de `docs/`
+    - Crear `docs/arquitectura.md`: tabla módulo → responsabilidad → requisitos que cumple → ficheros de test, con el estado de implementación de cada componente y las reglas de capas (`src/core/` sin DOM ni dependencias de `render/` ni `ui/`; `render/` lee el estado y nunca lo muta)
+    - Crear `docs/convenciones.md`: idioma (identificadores en inglés, documentación, comentarios y nombres de test en español), uso literal de los términos del glosario del dominio, `Result<T, E>` frente a excepciones y cuándo se admite `RangeError`, forma de los `GameError` (código estable, mensaje legible, contexto con fichero y ruta), reglas de determinismo, convenciones de test (`.test.ts` / `.prop.ts`, mínimo 100 iteraciones, comentario tag de propiedad), trazabilidad de requisitos en el JSDoc de cabecera de cada módulo, y convención de commits y ramas
+    - Crear `docs/modificar-el-juego.md`: recetas paso a paso, cada una con los ficheros que hay que tocar, los requisitos que la constriñen y el comando de verificación — ajustar balance, añadir un terreno, añadir un elemento, añadir una construcción con niveles, añadir una tecnología, añadir una restricción de generación de mapa (`CONSTRAINT_EVALUATORS`, `CONSTRAINT_PARAMETER_KEYS`, `CandidateStats`), añadir un puzzle y añadir un idioma
+    - Documentar las restricciones duras: sin `Math.random` ni `Date.now` en `src/core/`, sin números de balance en el código, sin cadenas de interfaz literales (solo claves i18n), la capa de datos no lanza excepciones ante datos inválidos, y un campo YAML nuevo obliga a tocar cargador, validador y serializador
+    - Crear `.kiro/steering/convenciones.md` y `.kiro/steering/arquitectura.md` con inclusión automática, referenciando los documentos de `docs/` mediante `#[[file:...]]` para no duplicar contenido, de modo que las convenciones obliguen también a las sesiones de Kiro y no se queden solo en la documentación humana
+    - _Requisitos: 20.1, 20.7, 22.5 — la especificación no declara requisitos de documentación del repositorio; esta tarea hace utilizable la extensibilidad sin tocar código que prometen los Requisitos 20 y 22_
 
 - [ ] 5. Visibilidad y exploración
   - [ ] 5.1 Implementar el Gestor de Visibilidad
@@ -164,6 +174,12 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
 
 - [ ] 8. Checkpoint - Asegurar que los tests pasan
   - Ejecutar `vitest --run` y verificar que todos los tests del núcleo de simulación pasan, preguntar al usuario si surgen dudas.
+
+  - [ ] 8.1 Actualizar la documentación de la fase
+    - Añadir a `docs/arquitectura.md` el Gestor de Visibilidad, el Sistema de Exploración, el Gestor de Recursos y el Reloj de Juego, con sus requisitos y sus ficheros de test
+    - Añadir a `docs/modificar-el-juego.md` las recetas de la fase: ajustar el coste y el tiempo de exploración, el consumo de comida y la probabilidad de enfermedad, y cambiar el número de fragmentos del día
+    - Documentar el modelo de población (consumo frente a empleo) y el invariante `Poblacion_Total = Libre + Empleada`, que es la trampa más fácil de romper al añadir una acción nueva
+    - Revisar que `docs/convenciones.md` recoge cualquier convención nueva introducida en la fase
 
 - [ ] 9. Sistema de construcciones y niveles
   - [ ] 9.1 Implementar el Sistema de Construcción
@@ -338,6 +354,13 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
 - [ ] 14. Checkpoint - Asegurar que los tests de lógica pasan
   - Ejecutar `vitest --run` y verificar que todos los tests de la capa de lógica de juego pasan, preguntar al usuario si surgen dudas.
 
+  - [ ] 14.1 Actualizar la documentación de la fase
+    - Añadir a `docs/arquitectura.md` construcciones, niveles, demolición, producción, explotación, fábricas, investigación, amenazas, combate, defensa, objetivos y puzzles
+    - Completar en `docs/modificar-el-juego.md` las recetas de contenido, que son las que un diseñador va a usar a diario: nueva construcción con sus niveles y modificadores de terreno y adyacencia, nueva tecnología con dependencias y desbloqueos, nueva amenaza con su expansión y su combate, nuevo puzzle fijo y nuevo tipo de fábrica
+    - Documentar la fórmula de producción y el orden en que se aplican modificador de terreno y modificadores de adyacencia, porque el orden cambia el resultado
+    - Documentar cómo se declara un Efecto_Global y qué sistemas lo consultan
+    - Revisar que `docs/convenciones.md` recoge cualquier convención nueva introducida en la fase
+
 - [ ] 15. Núcleo de Simulación: integración de todos los sistemas
   - [ ] 15.1 Implementar el Nucleo de Simulación
     - Crear `src/core/simulation.ts`
@@ -379,6 +402,13 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
 
 - [ ] 17. Checkpoint - Asegurar que toda la lógica de juego funciona
   - Ejecutar `vitest --run` y verificar que todos los tests (unitarios, propiedades e integración) de la lógica pasan, preguntar al usuario si surgen dudas.
+
+  - [ ] 17.1 Documentar el núcleo de simulación y la persistencia
+    - Añadir a `docs/arquitectura.md` el Nucleo de Simulación, el Registro de Eventos y el Sistema de Persistencia
+    - Documentar los 12 pasos del Fin_De_Dia en su orden fijo, indicando qué módulo resuelve cada paso y por qué el orden es parte del contrato
+    - Documentar el ciclo de vida de una acción: solicitud, validación, compromiso de coste, programación, resolución en su instante
+    - Añadir a `docs/modificar-el-juego.md` la receta de añadir un tipo de acción nueva y la de añadir un campo al estado guardado, con el efecto sobre `formatVersion`
+    - Documentar la política de versiones del formato de guardado y cuándo un cambio invalida las partidas existentes
 
 - [ ] 18. Motor de Render Canvas 2D
   - [ ] 18.1 Implementar el pipeline de renderizado
@@ -507,6 +537,14 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
 - [ ] 22. Checkpoint final - Asegurar que todo funciona
   - Ejecutar `vitest --run` y verificar que todos los tests pasan (unitarios, propiedades e integración). Ejecutar `npm run build` para verificar que no hay errores de compilación. Preguntar al usuario si surgen dudas.
 
+  - [ ] 22.1 Cerrar la documentación de la Fase 1
+    - Añadir a `docs/arquitectura.md` el Motor de Render, el Sistema de Interfaz y el Controlador de Entrada, con la separación entre lectura de estado y despacho de acciones
+    - Añadir a `docs/modificar-el-juego.md` las recetas de presentación: sustituir el pixel art generado por un atlas de sprites, cambiar la paleta, y añadir un panel o una pantalla de interfaz
+    - Documentar el mapa de teclas y la exigencia de que toda acción de ratón tenga equivalente de teclado, para que no se degrade al añadir interfaz
+    - Completar el `README.md`: capturas, cómo jugar, y guía de contribución con la lista de comprobación previa a un commit (typecheck, tests, sin números de balance en el código, sin cadenas literales de interfaz)
+    - Revisar que las recetas de `docs/modificar-el-juego.md` siguen siendo correctas ejecutando al menos una de contenido y otra de balance de principio a fin
+    - _Requisitos: 18.12_
+
 ## Notas
 
 - Las tareas marcadas con `*` son opcionales y pueden omitirse para un MVP más rápido.
@@ -517,6 +555,14 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
 - El código usa módulos puros (sin efectos secundarios) en la capa de lógica para facilitar el testing.
 - El estado es inmutable: cada acción produce un nuevo `GameState`.
 - Toda la configuración y contenido vive en YAML; el código es genérico.
+
+### Política de documentación
+
+- La especificación (`requirements.md`, `design.md`, `tasks.md`) describe **qué** hay que construir y **por qué**. La documentación de `docs/` describe **dónde** está cada cosa y **cómo** modificarla sin romper nada. Son complementarias y ninguna sustituye a la otra.
+- Cada fase termina con una tarea de documentación (4.3, 8.1, 14.1, 17.1, 22.1) que pone al día `docs/arquitectura.md` y `docs/modificar-el-juego.md` con los módulos de esa fase. La documentación no se deja para el final: se paga al cerrar cada fase, cuando el contexto todavía está fresco.
+- Los tres documentos de `docs/` tienen destinatarios distintos: `arquitectura.md` responde «en qué fichero se hace esto», `convenciones.md` responde «cómo se escribe aquí», y `modificar-el-juego.md` responde «qué toco para conseguir X».
+- Las convenciones se publican por duplicado a propósito: en `docs/` para el desarrollador humano y en `.kiro/steering/` para las sesiones de Kiro, que solo aplican de forma automática lo que viva en steering. Los ficheros de steering referencian los de `docs/` con `#[[file:...]]` en lugar de copiar el contenido.
+- Cada módulo mantiene su cabecera JSDoc con el algoritmo y los requisitos que cumple. Esa cabecera es la documentación de primera línea y va en el mismo commit que el código, no en la tarea de documentación de la fase.
 
 ## Task Dependency Graph
 
@@ -530,7 +576,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
     { "id": 4, "tasks": ["2.6"] },
     { "id": 5, "tasks": ["4.1", "5.1", "6.1", "7.1"] },
     { "id": 6, "tasks": ["4.2", "5.2", "6.2", "7.2"] },
-    { "id": 7, "tasks": ["5.3", "9.1", "9.4"] },
+    { "id": 7, "tasks": ["4.3", "5.3", "9.1", "9.4"] },
     { "id": 8, "tasks": ["9.2", "9.3", "10.1", "10.2"] },
     { "id": 9, "tasks": ["9.5", "10.3", "11.1"] },
     { "id": 10, "tasks": ["11.2", "12.1", "12.2"] },
@@ -548,3 +594,5 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
   ]
 }
 ```
+
+Las tareas de documentación de fase (`8.1`, `14.1`, `17.1`, `22.1`) no aparecen en el grafo porque, igual que los checkpoints de los que cuelgan, no son paralelizables: cierran la fase una vez sus tareas han terminado. La `4.3` sí figura, en la ola 7, porque documenta un estado ya alcanzado y puede escribirse en paralelo con el arranque de la fase siguiente.
