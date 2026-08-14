@@ -82,7 +82,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
 - [x] 3. Checkpoint - Asegurar que los tests pasan
   - Ejecutar `vitest --run` y verificar que todos los tests de la capa de datos pasan, preguntar al usuario si surgen dudas.
 
-- [ ] 4. Generación procedural del mapa
+- [x] 4. Generación procedural del mapa
   - [x] 4.1 Implementar el Generador de Mapa
     - Crear `src/core/map-generator.ts`
     - Algoritmo: crear hexágonos en espiral, asignar terreno central compatible con Ciudad, asignar terrenos por peso, colocar Ciudad nivel 1, colocar elementos en orden declarado respetando densidades y terrenos permitidos
@@ -94,7 +94,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
     - Retornar `GenerationResult`
     - _Requisitos: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 1.10, 1.11_
 
-  - [ ] 4.2 Escribir tests de propiedades para el generador de mapa
+  - [x] 4.2 Escribir tests de propiedades para el generador de mapa
     - **Propiedad 1: Determinismo del generador** — misma semilla y escenario → mapa idéntico
     - **Propiedad 2: Invariantes estructurales** — 0 o 1 elementos por hex, niveles de amenaza crecientes con distancia, restricciones cumplidas
     - **Valida: Requisitos 1.12, 1.13, 1.14, 1.15**
