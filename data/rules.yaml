@@ -21,6 +21,7 @@ rules:
       tags: []
       unique: false
       demolishable: true
+      sacrificable: true        # se puede sacrificar ante una pérdida (4.7, 4.8)
       produce_durante_mejora: true
     technologies:
       dependencies: []

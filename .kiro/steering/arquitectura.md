@@ -57,7 +57,7 @@ type ElementCategory = 'mountain' | 'forest' | 'domestic_animal' | 'fish' | 'wha
                      | 'settlement' | 'mystery' | 'animal_threat' | 'human_threat';
 ```
 
-Ampliarlos exige tocar `types.ts` **y** las listas espejo `TERRAIN_TYPES`, `ELEMENT_CATEGORIES` y `THREAT_CATEGORIES` de `map-generator.ts`. Es la única excepción relevante a «el contenido nuevo no toca código».
+Ampliarlos exige tocar `types.ts` **y** las listas espejo `TERRAIN_TYPES`, `ELEMENT_CATEGORIES` y `THREAT_CATEGORIES` de `map-generator.ts`, más la segunda `ELEMENT_CATEGORIES` de `resources.ts`. Es la única excepción relevante a «el contenido nuevo no toca código».
 
 **`Poblacion_Total` no se almacena**: es `freePopulation + employedPopulation`.
 
