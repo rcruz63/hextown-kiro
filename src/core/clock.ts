@@ -207,11 +207,19 @@ export type GameInstant =
 /**
  * Motivos por los que el reloj pasa a parado una vez resueltos todos los pasos
  * del instante en curso (Requisito 5.15).
+ *
+ * `threat_discovered` no figura en la enumeración del Requisito 5.15, pero el
+ * Requisito 3.8 exige parar el reloj cuando una exploración revela una amenaza,
+ * y ese motivo no es ninguno de los otros: no es un combate, que aún no ha
+ * ocurrido, ni una expansión de amenaza, que es un movimiento del
+ * Sistema_De_Amenazas. Añadirlo al vocabulario no cambia el comportamiento del
+ * reloj, que solo cuenta causas para hacer una única transición a parado.
  */
 export type PauseCause =
   | 'combat'
   | 'mystery_discovered'
   | 'settlement_discovered'
+  | 'threat_discovered'
   | 'threat_expansion'
   | 'mission_completed'
   | 'objective_completed';
