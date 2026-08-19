@@ -108,6 +108,7 @@ _Requisitos: 9.1, 1.4, 20.7, 22.1. Verificación: `npm test`._
     tags: ["industria"]          # penaliza a las casas adyacentes (6.11)
     unique: false
     demolishable: true
+    sacrificable: true           # se puede sacrificar ante una pérdida (4.7, 4.8)
     terrain_modifiers:           # multiplicativos sobre la producción base
       prado: 1.0
       no_fertil: 1.2
@@ -255,7 +256,7 @@ La otra excepción a «el contenido no toca código», porque son uniones de lit
 5. `data/scenarios/*.yaml` → un peso en `terrain_weights`, o el terreno no aparecerá.
 6. **Revisa las construcciones**: cada una declara `terrain_modifiers` por terreno y `allowed_terrains`. Un terreno nuevo no entra solo en ninguna de las dos listas, así que ninguna construcción podrá levantarse ahí hasta que lo añadas.
 
-**Para una categoría de elemento**, lo mismo con `ElementCategory` en `types.ts` y `ELEMENT_CATEGORIES` en `map-generator.ts`. Si la categoría es una amenaza, mira también `THREAT_CATEGORIES` en el mismo fichero: es la lista que decide qué elementos reciben nivel, `accumulatedDamage` y `appearedDay`.
+**Para una categoría de elemento**, lo mismo con `ElementCategory` en `types.ts` y las dos listas espejo `ELEMENT_CATEGORIES`: la de `map-generator.ts`, que decide qué elementos se colocan, y la de `resources.ts`, que decide qué elemento se restaura al sacrificar la construcción que lo tenía montado. La de `resources.ts` está escrita con `satisfies Record<ElementCategory, ElementCategory>`, así que el compilador avisa si te la dejas. Si la categoría es una amenaza, mira también `THREAT_CATEGORIES` en `map-generator.ts`: es la lista que decide qué elementos reciben nivel, `accumulatedDamage` y `appearedDay`.
 
 _Requisitos: 20.7 (con la salvedad de los vocabularios cerrados). Verificación: `npm run typecheck && npm test`._
 

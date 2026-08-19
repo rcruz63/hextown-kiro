@@ -122,7 +122,7 @@ Cada definición cargada lleva un campo `raw` con **el mapa YAML completo**, def
 
 El mapeo YAML → TypeScript es **explícito campo por campo**, no una conversión automática de snake_case. `allowed_terrains` se convierte en `allowedTerrains` porque está escrito a mano en el cargador. Un campo nuevo **no** aparece como propiedad camelCase: solo vive en `raw`, y así es como está pensado.
 
-Campos que hoy solo existen en `raw`, no como propiedad tipada: `tags`, `unique`, `demolishable`, `terrain_modifiers`, `terrain_modifiers_per_element`, `adjacency_modifiers`, `mounts_on_elements`, `requires_adjacent_element`, `production_per_day`, `production_per_element`, `production_per_adjacent`, `consumes_per_day`, `blocks_expansion_radius`, `unlocks`, `on_success`, `on_failure`, `generator`, `reward`, `combat`, `respawn`, `expansion`, `passive_effects`, `puzzle_kind`, `actions`, y también `map.seed` y `map.city_construction_id`.
+Campos que hoy solo existen en `raw`, no como propiedad tipada: `tags`, `unique`, `demolishable`, `sacrificable`, `terrain_modifiers`, `terrain_modifiers_per_element`, `adjacency_modifiers`, `mounts_on_elements`, `requires_adjacent_element`, `production_per_day`, `production_per_element`, `production_per_adjacent`, `consumes_per_day`, `blocks_expansion_radius`, `unlocks`, `on_success`, `on_failure`, `generator`, `reward`, `combat`, `respawn`, `expansion`, `passive_effects`, `puzzle_kind`, `actions`, y también `map.seed` y `map.city_construction_id`.
 
 ### Valores por defecto
 

@@ -180,6 +180,49 @@
         "chatSessionId": "sess_48545e0d-422f-48f3-b5f2-68ce4512b195",
         "timestamp": 1786620069951
       }
+    ],
+    "5.1 Implementar el Gestor de Visibilidad": [
+      {
+        "executionId": "505d7169-9b0e-4166-9cc4-0d53b4ceed3a",
+        "chatSessionId": "sess_1b3f4867-91c0-41a1-a9d9-2c182a1ce09a",
+        "timestamp": 1786710381849
+      },
+      {
+        "executionId": "65572092-bb71-485a-925f-e53f6c243221",
+        "chatSessionId": "sess_1b3f4867-91c0-41a1-a9d9-2c182a1ce09a",
+        "timestamp": 1786961727870
+      }
+    ],
+    "6.1 Implementar el Gestor de Recursos": [
+      {
+        "executionId": "65572092-bb71-485a-925f-e53f6c243221",
+        "chatSessionId": "sess_1b3f4867-91c0-41a1-a9d9-2c182a1ce09a",
+        "timestamp": 1786962043200
+      },
+      {
+        "executionId": "65572092-bb71-485a-925f-e53f6c243221",
+        "chatSessionId": "sess_1b3f4867-91c0-41a1-a9d9-2c182a1ce09a",
+        "timestamp": 1786969706809
+      }
+    ],
+    "7.1 Implementar el Reloj de Juego": [
+      {
+        "executionId": "65572092-bb71-485a-925f-e53f6c243221",
+        "chatSessionId": "sess_1b3f4867-91c0-41a1-a9d9-2c182a1ce09a",
+        "timestamp": 1786969711050
+      },
+      {
+        "executionId": "65572092-bb71-485a-925f-e53f6c243221",
+        "chatSessionId": "sess_1b3f4867-91c0-41a1-a9d9-2c182a1ce09a",
+        "timestamp": 1787122838278
+      }
+    ],
+    "5.2 Implementar el Sistema de Exploración": [
+      {
+        "executionId": "65572092-bb71-485a-925f-e53f6c243221",
+        "chatSessionId": "sess_1b3f4867-91c0-41a1-a9d9-2c182a1ce09a",
+        "timestamp": 1787122842707
+      }
     ]
   }
 }
