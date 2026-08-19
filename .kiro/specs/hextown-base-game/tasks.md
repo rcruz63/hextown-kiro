@@ -109,8 +109,8 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
     - Crear `.kiro/steering/convenciones.md` y `.kiro/steering/arquitectura.md` con inclusión automática, referenciando los documentos de `docs/` mediante `#[[file:...]]` para no duplicar contenido, de modo que las convenciones obliguen también a las sesiones de Kiro y no se queden solo en la documentación humana
     - _Requisitos: 20.1, 20.7, 22.5 — la especificación no declara requisitos de documentación del repositorio; esta tarea hace utilizable la extensibilidad sin tocar código que prometen los Requisitos 20 y 22_
 
-- [ ] 5. Visibilidad y exploración
-  - [ ] 5.1 Implementar el Gestor de Visibilidad
+- [~] 5. Visibilidad y exploración
+  - [x] 5.1 Implementar el Gestor de Visibilidad
     - Crear `src/core/visibility.ts`
     - Estados: oculto, atenuado, explorado
     - Inicialización: Ciudad + anillo 1 explorados, anillo 2 atenuado, resto oculto
@@ -118,7 +118,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
     - `revealHex`: marcar explorado y atenuar vecinos ocultos
     - _Requisitos: 2.1, 2.2, 2.8, 2.9, 2.10, 2.11_
 
-  - [ ] 5.2 Implementar el Sistema de Exploración
+  - [x] 5.2 Implementar el Sistema de Exploración
     - Crear `src/core/exploration.ts`
     - Calcular tiempo: `tiempo_base + floor(D / dias_por_distancia)`
     - Calcular coste en población: `max(1, ceil(D × poblacion_por_distancia × efectos_globales))`
@@ -134,7 +134,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
     - **Valida: Requisitos 2.9, 2.10, 2.11, 3.11, 3.12, 3.13**
 
 - [ ] 6. Gestión de recursos y modelo de población
-  - [ ] 6.1 Implementar el Gestor de Recursos
+  - [x] 6.1 Implementar el Gestor de Recursos
     - Crear `src/core/resources.ts`
     - Mantener: Poblacion_Libre, Poblacion_Empleada, comida, materiales, ciencia, oro
     - `canAfford(state, cost)`: verificar suficiencia
@@ -154,7 +154,7 @@ Implementación incremental del juego base Hextown en TypeScript + Vite con Canv
     - **Valida: Requisitos 4.18, 4.19, 4.20, 4.21**
 
 - [ ] 7. Reloj de juego y programación de acciones
-  - [ ] 7.1 Implementar el Reloj de Juego
+  - [x] 7.1 Implementar el Reloj de Juego
     - Crear `src/core/clock.ts`
     - Estados: parado, play, avance rápido
     - Dividir día en `rules.day.fragments` fragmentos
